@@ -9,3 +9,5 @@ bridge.connect()
 lights = bridge.get_light_objects('id')
 lights[1].on = True
 lights[1].brightness = 127
+
+print(lights)
