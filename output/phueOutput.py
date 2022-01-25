@@ -36,13 +36,20 @@ class PhueOutput:
 
 		return [x, y]
 
+	def changeLights(self, r, g, b, light):
+		lights = self.bridge.get_light_objects()
+		lights[light]
+		lights[light].brightness = 255
+		lights[light].xy = self.rgb_to_xy(r, g, b)
 
-	def changeLights(self, r, g, b):
+	"""
+	def changeLights(self, r, g, b, light):
 		lights = self.bridge.get_light_objects()
 		for light in lights:
 			print(lights)
 			light.brightness = 255
 			light.xy = self.rgb_to_xy(r, g, b)
+	"""
 
 	""""
 	#Tak ovanför dörr
@@ -57,5 +64,3 @@ class PhueOutput:
 	lights[15].on = True
 	lights[15].brightness = 255
 	"""
-
-PhueOutput.main(self=PhueOutput)
