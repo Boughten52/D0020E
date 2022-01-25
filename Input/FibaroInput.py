@@ -117,7 +117,7 @@ def main():
     for device in lights:
         room_id = device.roomID
         room_name = get_room_name_from_id(room_id)
-        state = "on" if device.properties['value'] == "1" else "off"
+        state = "on" if device.properties['value'] == "true" else "off"
         print("  {}({}) in {} is {}".format(
             device.name,
             device.id,
