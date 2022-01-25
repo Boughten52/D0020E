@@ -1,5 +1,6 @@
 import toml
 
+from Input.Fibaro import Fibaro
 from Input.WidefindInput import WideFind
 from fiblary3.client import Client
 
@@ -9,14 +10,18 @@ def main():
     config = toml.load("config.toml")
 
     # use config file-----------------------------------------------------------------------
-    if config["useWideFind"]:
+    if config["widefind"]["enabled"]:
         print("Using WideFind")
-        # widefind = WideFind("130.240.74.55", 1883)
+        widefind = WideFind(config["widefind"]["ip"], config["widefind"]["port"])
+        widefind.run()
 
-    if config["usingFibaro"]:
+    if config["fibaro"]["enabled"]:
         print("Using Fibaro")
-        # fibaro = Fibaro("ip")
+        fibaro = Fibaro(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
 
+        print("Open doors:")
+        for device in fibaro.getOpenDoors():
+            print(device.id, device.name)
 
     # get sesor data -----------------------------------------------------------------------
 
