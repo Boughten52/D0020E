@@ -35,8 +35,8 @@ class WideFind:
         #print(tracker_id)
 
 
-widefind = WideFind("130.240.74.55", 1883)
-widefind.run()
+#widefind = WideFind("130.240.74.55", 1883)
+#widefind.run()
 
-while True:
-    pass
+#while True:
+#    pass

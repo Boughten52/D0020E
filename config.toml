@@ -1,2 +1,13 @@
-useWideFind = false
-useFibaro = false
+[userinfo]
+user = 0
+
+[widefind]
+enabled = false
+ip = "130.240.74.55"
+port = 1883
+
+[fibaro]
+enabled = true
+ip = "http://130.240.114.44/api/"
+user = "unicorn@ltu.se"
+password = "Ks2mpH2Al!"
