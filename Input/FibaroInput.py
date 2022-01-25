@@ -48,11 +48,10 @@ def main():
     start = time.time()
 
 
-
+    # Ytterdörr id = 42
     open_doors = hc2.devices.list(
-        baseType = "com.fibaro.doorWindowSensor"
-        #properties = "parameters[id==1]"
-
+        baseType = "com.fibaro.doorWindowSensor",
+        jsonpath="$[?(@.properties.value==False)]"
     )
 
     print("Open doors:")
