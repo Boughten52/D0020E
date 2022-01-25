@@ -11,6 +11,8 @@ bridge.connect()
 
 print("HEJ")
 
+print("Hello")
+
 # Might be preferable to get the names instead of id:s
 #lights = bridge.get_light_objects('id')
 #{13: <phue.Light object "Hue color light 1" at 0x7ffa10ab4fd0>, 14: <phue.Light object "Hue color light 2" at 0x7ffa10ad05d0>, 15: <phue.Light object "Hue color light 3" at 0x7ffa138a5950>}

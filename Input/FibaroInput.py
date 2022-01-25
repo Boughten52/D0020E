@@ -50,8 +50,8 @@ def main():
 
 
     open_doors = hc2.devices.list(
-        baseType = "com.fibaro.doorWindowSensor"
-        #properties = "parameters[id==1]"
+        baseType = "com.fibaro.doorWindowSensor",
+        properties = "'value' = false"
 
     )
 
