@@ -7,7 +7,18 @@ ip = "130.240.74.55"
 port = 1883
 
 [fibaro]
-enabled = true
+enabled = false
 ip = "http://130.240.114.44/api/"
 user = "unicorn@ltu.se"
 password = "Ks2mpH2Al!"
+
+[phue]
+enabled = false
+ip = "130.240.114.9"
+
+
+# Explanations here
+
+[rules_0]
+if =    ["door_42_open", "position_000_kitchen", "door_42_open"]
+then =  ["lamp_1_on"   , "lamp_2_on"           , "lamp_3_off"  ]
