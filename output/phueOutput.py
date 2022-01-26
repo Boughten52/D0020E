@@ -4,10 +4,11 @@ from time import sleep
 from phue import Bridge
 
 class PhueOutput:
-	bridge = Bridge('130.240.114.9')
+	#bridge = Bridge('130.240.114.9')
 
-	def main(self) -> None:
+	def __init__(self, ip):
 		# Connect once and press the connect button on the Pilips Hue bridge at the same time
+		self.bridge = Bridge(ip)
 		self.bridge.connect()
 		#self.changeLights(self, 255, 0, 0)
 
