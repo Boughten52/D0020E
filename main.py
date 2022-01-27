@@ -1,7 +1,7 @@
 import toml
 
-from input.Fibaro import Fibaro
-# from input.WidefindInput import WideFind
+from Input.Fibaro import Fibaro
+from Input.WidefindInput import WideFind
 from output.phueOutput import PhueOutput
 
 
@@ -10,12 +10,12 @@ def main():
 
     if config["widefind"]["enabled"]:
         print("Using WideFind")
-        # widefind = WideFind(config["widefind"]["ip"], config["widefind"]["port"])
-        # widefind.run()
+        widefind = WideFind(config["widefind"]["ip"], config["widefind"]["port"])
+        widefind.run()
 
     if config["fibaro"]["enabled"]:
         print("Using Fibaro")
-        fibaro = Fibaro(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
+        #fibaro = Fibaro(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
 
         # UNCOMMENT TO SEE CURRENTLY OPEN DOORS
         # print("Open doors:")
@@ -34,6 +34,8 @@ def main():
             rules[config[currentUserList]["if"][i]].append(config[currentUserList]["then"][i])
         else:
             rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
+
+    print(rules)
 
     # On message:
     # trigger = message_payload
@@ -59,6 +61,8 @@ def main():
     # while True:
     #    pass
 
-
 if __name__ == '__main__':
     main()
+
+while True:
+    pass
