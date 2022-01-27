@@ -3,10 +3,18 @@ import toml
 from Input.Fibaro import Fibaro
 from Input.WidefindInput import WideFind
 from output.phueOutput import PhueOutput
+from Observer.ObserverClass import Subject
+from Observer.ObserverClass import Observer
+
 
 
 def main():
     config = toml.load("config.toml")
+
+    subject = Subject()
+    observer = Observer()
+
+    subject.attach(observer)
 
     if config["widefind"]["enabled"]:
         print("Using WideFind")
@@ -35,7 +43,15 @@ def main():
         else:
             rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
 
-    print(rules)
+    ifs   = config["rules_0"]["if"]
+    thens = config["rules_0"]["then"]
+
+    message = "position_001_tv-bänk"
+
+    for i, position in enumerate(ifs):
+        if message == position:
+            light = int(thens[i])
+            phue.changeLight(255, 0, 255, light)
 
     # On message:
     # trigger = message_payload
