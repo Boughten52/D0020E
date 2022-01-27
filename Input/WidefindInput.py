@@ -100,9 +100,27 @@ class WideFind:
         mqtt_message_str = message.payload.decode("utf-8")
         mqtt_message_json = json.loads(message.payload)
         mqtt_message_list = mqtt_message_json["message"].split(',')
-        print(mqtt_message_list)
+        tracker_id = mqtt_message_list[0][7:]
 
-        return mqtt_message_list
+        #Get coordinates
+        list = mqtt_message_list[2:5]
+        vector = np.array([])
+
+        #Convert to int
+        for element in list:
+            intElement = int(element)
+            vector = np.append(vector, intElement)
+
+        #If you stand at the tv bench
+        if (vector[0] <= 4400 and vector[0] >= 4000):
+            if (vector[2] <= 700 and vector[2] >= 500):
+                message = "position_001_tv-bänk"
+                return message
+        else:
+            message = "icke_position_001_tv-bänk"
+            return message
+
+        return
 
 
         """
