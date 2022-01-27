@@ -5,7 +5,7 @@ from typing import List
 
 
 class Subject(ABC):
-    subscribers = ha
+    #subscribers = ha
 
     @abstractmethod
     def attach(self, observer: Observer) -> None:
