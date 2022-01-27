@@ -10,14 +10,11 @@ class PhueOutput:
 		# Connect once and press the connect button on the Pilips Hue bridge at the same time
 		self.bridge = Bridge(ip)
 		self.bridge.connect()
-		#self.changeLights(self, 255, 0, 0)
 
 	# Might be preferable to get the names instead of id:s
 	#lights = bridge.get_light_objects('id')
 	#{13: <phue.Light object "Hue color light 1" at 0x7ffa10ab4fd0>, 14: <phue.Light object "Hue color light 2" at 0x7ffa10ad05d0>, 15: <phue.Light object "Hue color light 3" at 0x7ffa138a5950>}
 
-	#Tak ovanför dörr
-	#lights[13].on = True
 
 	def rgb_to_xy(self, red, green, blue):
 
@@ -37,31 +34,18 @@ class PhueOutput:
 
 		return [x, y]
 
-	def changeLights(self, r, g, b, light):
-		lights = self.bridge.get_light_objects()
-		lights[light]
+	def lightOff(self, light):
+		lights = self.bridge.get_light_objects('id')
+		lights[light].brightness = 0
+
+	def changeLight(self, r, g, b, light):
+		lights = self.bridge.get_light_objects('id')
 		lights[light].brightness = 255
 		lights[light].xy = self.rgb_to_xy(r, g, b)
 
-	"""
-	def changeLights(self, r, g, b, light):
+
+	def changeLights(self, r, g, b):
 		lights = self.bridge.get_light_objects()
 		for light in lights:
-			print(lights)
 			light.brightness = 255
 			light.xy = self.rgb_to_xy(r, g, b)
-	"""
-
-	""""
-	#Tak ovanför dörr
-	lights[13].on = True
-	lights[13].brightness = 255
-	
-	#Tak ovanför mikro
-	lights[14].on = True
-	lights[14].brightness = 255
-	
-	#Lampa på tvbänken
-	lights[15].on = True
-	lights[15].brightness = 255
-	"""

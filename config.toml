@@ -2,7 +2,7 @@
 user = 0
 
 [widefind]
-enabled = false
+enabled = true
 ip = "130.240.74.55"
 port = 1883
 
@@ -13,7 +13,7 @@ user = "unicorn@ltu.se"
 password = "Ks2mpH2Al!"
 
 [phue]
-enabled = false
+enabled = true
 ip = "130.240.114.9"
 
 
