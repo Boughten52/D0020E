@@ -79,6 +79,7 @@ def main():
             # for state in widefindStates...
         if config["fibaro"]["enabled"]:
             fibaroStates = fibaro.get_state()
+            # CONTINUE HERE
         time.sleep(1)
 
 

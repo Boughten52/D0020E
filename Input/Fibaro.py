@@ -13,3 +13,10 @@ class Fibaro:
             baseType = "com.fibaro.doorWindowSensor",
             jsonpath="$[?(@.properties.value==True)]")
         return openDoors
+
+    def get_state(self):
+        state = []
+        openDoors = self.getOpenDoors()
+        for device in openDoors:
+            state.append("door_" + str(device.id) + "_open")
+        return state
