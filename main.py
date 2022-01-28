@@ -78,7 +78,8 @@ def main():
             widefindStates = widefind.get_state()
             # for state in widefindStates...
 
-        if config["fibaro"]["enabled"]:
+
+        if config["fibaro"]["enabled"] == False:
             fibaro_states = fibaro.get_state()
             #fibaro_states = fibaro.get_state_debug() # FOR DEBUG
             for state in fibaro_states:
@@ -91,8 +92,11 @@ def main():
                         action = data[2]
                         if name == "lamp":
                             if action == "on":
-                                phue.changeLight(255, 0, 0, id)
+                                phue.changeLight(255, 0, 0, int(id))
+                            if action == "off":
+                                phue.lightOff(int(id))
 
+        print("In main")
         time.sleep(1)
 
 
