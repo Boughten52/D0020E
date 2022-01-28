@@ -11,19 +11,19 @@ from Observer.ObserverClass import Observer
 def main():
     config = toml.load("config.toml")
 
-    subject = Subject()
-    observer = Observer()
+    #subject = Subject()
+    #observer = Observer()
 
-    subject.attach(observer)
+    #subject.attach(observer)
 
     if config["widefind"]["enabled"]:
-        print("Using WideFind")
         widefind = WideFind(config["widefind"]["ip"], config["widefind"]["port"])
         widefind.run()
+        print("WideFind connected")
 
     if config["fibaro"]["enabled"]:
-        print("Using Fibaro")
         fibaro = Fibaro(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
+        print("Fibaro connected")
 
         # UNCOMMENT TO SEE CURRENTLY OPEN DOORS
         # print("Open doors:")
@@ -31,8 +31,8 @@ def main():
         #    print(device.id, device.name)
 
     if config["phue"]["enabled"]:
-        print("Using Philips hue")
         phue = PhueOutput(config["phue"]["ip"])
+        print("Philips hue connected")
 
     # Read rules to dictionary
     currentUserList = "rules_" + str(config["userinfo"]["user"])
@@ -43,15 +43,15 @@ def main():
         else:
             rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
 
-    ifs = config["rules_0"]["if"]
-    thens = config["rules_0"]["then"]
+    #ifs = config["rules_0"]["if"]
+    #thens = config["rules_0"]["then"]
 
-    message = "position_001_tv-bänk"
+    #message = "position_001_tv-bänk"
 
-    for i, position in enumerate(ifs):
-        if message == position:
-            light = int(thens[i])
-            phue.changeLight(255, 0, 255, light)
+    #for i, position in enumerate(ifs):
+    #    if message == position:
+    #        light = int(thens[i])
+    #        phue.changeLight(255, 0, 255, light)
 
     # On message:
     # trigger = message_payload
@@ -77,9 +77,22 @@ def main():
         if config["widefind"]["enabled"]:
             widefindStates = widefind.get_state()
             # for state in widefindStates...
+
         if config["fibaro"]["enabled"]:
-            fibaroStates = fibaro.get_state()
-            # CONTINUE HERE
+            fibaro_states = fibaro.get_state()
+            #fibaro_states = fibaro.get_state_debug() # FOR DEBUG
+            for state in fibaro_states:
+                if state in rules.keys():
+                    output_list = rules[state]
+                    for output in output_list:
+                        data = output.split("_")
+                        name = data[0]
+                        id = data[1]
+                        action = data[2]
+                        if name == "lamp":
+                            if action == "on":
+                                phue.changeLight(255, 0, 0, id)
+
         time.sleep(1)
 
 
