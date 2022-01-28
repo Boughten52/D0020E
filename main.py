@@ -1,11 +1,11 @@
 import toml
+import time
 
 from Input.Fibaro import Fibaro
 from Input.WidefindInput import WideFind
 from output.phueOutput import PhueOutput
 from Observer.ObserverClass import Subject
 from Observer.ObserverClass import Observer
-
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
 
     if config["fibaro"]["enabled"]:
         print("Using Fibaro")
-        #fibaro = Fibaro(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
+        fibaro = Fibaro(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
 
         # UNCOMMENT TO SEE CURRENTLY OPEN DOORS
         # print("Open doors:")
@@ -43,7 +43,7 @@ def main():
         else:
             rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
 
-    ifs   = config["rules_0"]["if"]
+    ifs = config["rules_0"]["if"]
     thens = config["rules_0"]["then"]
 
     message = "position_001_tv-bänk"
@@ -73,12 +73,14 @@ def main():
     #          if output[name] == "lamp":
     #              if output[action] == "on":
     #                  phue.turnOnLamp(output[id])
+    while True:
+        if config["widefind"]["enabled"]:
+            widefindStates = widefind.get_state()
+            # for state in widefindStates...
+        if config["fibaro"]["enabled"]:
+            fibaroStates = fibaro.get_state()
+        time.sleep(1)
 
-    # while True:
-    #    pass
 
 if __name__ == '__main__':
     main()
-
-while True:
-    pass
