@@ -16,7 +16,11 @@ class Fibaro:
 
     def get_state(self):
         state = []
-        openDoors = self.getOpenDoors()
-        for device in openDoors:
+        open_doors = self.getOpenDoors()
+        for device in open_doors:
             state.append("door_" + str(device.id) + "_open")
+        return state
+
+    def get_state_debug(self):
+        state = ["door_42_open"]
         return state
