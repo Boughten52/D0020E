@@ -1,6 +1,9 @@
+import time
+
 from fiblary3.client import Client
 import paho.mqtt.client as mqtt
 import json
+import threading
 
 
 class Fibaro:
@@ -14,6 +17,7 @@ class Fibaro:
             jsonpath="$[?(@.properties.value==True)]")
         return openDoors
 
+    # LAUNCH FUNCTION IN SEPARATE THREAD, SLEEP IN FUNCTION FOR SOME TIME, NOTIFY OBSERVERS, REPEAT
     def get_state(self):
         state = []
         open_doors = self.getOpenDoors()
