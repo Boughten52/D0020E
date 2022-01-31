@@ -3,7 +3,7 @@ import time
 
 from Input.Fibaro import Fibaro
 from Input.WidefindInput import WideFind
-from output.phueOutput import PhueOutput
+from output.phueOutput import Phue
 import Observer.ObserverClass
 
 observer = Observer.ObserverClass
@@ -12,7 +12,7 @@ observer = Observer.ObserverClass
 config = toml.load("config.toml")
 
 if config["phue"]["enabled"]:
-    phue = PhueOutput(config["phue"]["ip"])
+    phue = Phue(config["phue"]["ip"])
     print("Philips hue connected")
 
 # Read rules to dictionary
@@ -82,7 +82,7 @@ def main():
                         action = data[2]
                         if name == "lamp":
                             if action == "on":
-                                phue.changeLight(255, 0, 0, id)
+                                phue.change_light(255, 0, 0, id)
 
         time.sleep(1)
 
@@ -97,14 +97,13 @@ def eventHandler(data):
             action = message[2]
             if name == "lamp":
                 if action == "on":
-                    phue.changeLight(0, 0, 255, int(id))
+                    phue.change_light(0, 0, 255, int(id))
+                    print("On")
+
                 if action == "off":
+                    phue.light_off(int(id))
+                    #phue.change_lights(200, 0, 255)
                     print("off")
-                    #phue.changeLight(255, 0, 255, int(id))
-                    phue.lightOff(int(id))
-                    print("off")
-
-
 
 def setupEventHandler():
     observer.subscribe("Event", eventHandler)
