@@ -1,58 +1,52 @@
+import sys
+import threading
+import os
 import toml
 import time
+import Observer.ObserverClass
 
-from Input.Fibaro import Fibaro
+from Input import Fibaro
 from Input.WidefindInput import WideFind
 from output.Phue import Phue
-from Observer.ObserverClass import Subject
-from Observer.ObserverClass import Observer
+
+# -------- INITIALIZE GLOBAL VARIABLES/OBJECTS -------- #
+observer = Observer.ObserverClass
+config = toml.load("config.toml")
+
+# -------- INSTANTIATE WIDEFIND -------- #
+if config["widefind"]["enabled"]:
+    widefind = WideFind(config["widefind"]["ip"], config["widefind"]["port"])
+    widefind.run()
+    print("WideFind connected")
+
+# -------- START FIBARO LOOP AS THREAD -------- #
+if config["fibaro"]["enabled"]:
+    fibaroThread = threading.Thread(
+        target=Fibaro.run,
+        args=[config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"]])
+    fibaroThread.start()
+    #Fibaro.run(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
+    print("Fibaro connected")
+
+# -------- INSTANTIATE PHUE -------- #
+if config["phue"]["enabled"]:
+    phue = Phue(config["phue"]["ip"])
+    print("Philips hue connected")
+
+# -------- READ RULES TO DICTIONARY -------- #
+currentUserList = "rules_" + str(config["userinfo"]["user"])
+rules = {}
+for i in range(0, len(config[currentUserList]["if"])):
+    if config[currentUserList]["if"][i] in rules:
+        rules[config[currentUserList]["if"][i]].append(config[currentUserList]["then"][i])
+    else:
+        rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
 
 
 def main():
-    config = toml.load("config.toml")
-
-    #subject = Subject()
-    #observer = Observer()
-
-    #subject.attach(observer)
-
-    if config["widefind"]["enabled"]:
-        widefind = WideFind(config["widefind"]["ip"], config["widefind"]["port"])
-        widefind.run()
-        print("WideFind connected")
-
-    if config["fibaro"]["enabled"]:
-        fibaro = Fibaro(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
-        print("Fibaro connected")
-
-        # UNCOMMENT TO SEE CURRENTLY OPEN DOORS
-        # print("Open doors:")
-        # for device in fibaro.getOpenDoors():
-        #    print(device.id, device.name)
-
-    if config["phue"]["enabled"]:
-        phue = Phue(config["phue"]["ip"])
-        print("Philips hue connected")
-
-    # Read rules to dictionary
-    currentUserList = "rules_" + str(config["userinfo"]["user"])
-    rules = {}
-    for i in range(0, len(config[currentUserList]["if"])):
-        if config[currentUserList]["if"][i] in rules:
-            rules[config[currentUserList]["if"][i]].append(config[currentUserList]["then"][i])
-        else:
-            rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
-
-    #ifs = config["rules_0"]["if"]
-    #thens = config["rules_0"]["then"]
-
-    #message = "position_001_tv-bänk"
-
-    #for i, position in enumerate(ifs):
-    #    if message == position:
-    #        light = int(thens[i])
-    #        phue.changeLight(255, 0, 255, light)
-
+    while True:
+        print("IN MAIN")
+        time.sleep(1)
     # On message:
     # trigger = message_payload
     # if trigger in rules:
@@ -73,15 +67,15 @@ def main():
     #          if output[name] == "lamp":
     #              if output[action] == "on":
     #                  phue.turnOnLamp(output[id])
+
+    """
     while True:
         if config["widefind"]["enabled"]:
             widefindStates = widefind.get_state()
             # for state in widefindStates...
 
 
-        if config["fibaro"]["enabled"]:
-            fibaro_states = fibaro.get_state()
-            #fibaro_states = fibaro.get_state_debug() # FOR DEBUG
+        if config["fibaro"]["enabled"] == False:
             for state in fibaro_states:
                 if state in rules.keys():
                     output_list = rules[state]
@@ -100,9 +94,28 @@ def main():
                                 phue.change_light(255, 0, 0, id)
                             if action == "purple":
                                 phue.change_light(255, 0, 255, id)
+                            if action == "debug":
+                                print("main")
 
+        print("In main")
         time.sleep(1)
+        """
+
+
+def eventHandler(data):
+    print("EVENT HANDLER")
+
+
+def setupEventHandler():
+    observer.subscribe("Event", eventHandler)
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Interrupted')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)
