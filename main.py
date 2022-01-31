@@ -3,7 +3,7 @@ import time
 
 from Input.Fibaro import Fibaro
 from Input.WidefindInput import WideFind
-from output.phueOutput import PhueOutput
+from output.Phue import Phue
 from Observer.ObserverClass import Subject
 from Observer.ObserverClass import Observer
 
@@ -31,7 +31,7 @@ def main():
         #    print(device.id, device.name)
 
     if config["phue"]["enabled"]:
-        phue = PhueOutput(config["phue"]["ip"])
+        phue = Phue(config["phue"]["ip"])
         print("Philips hue connected")
 
     # Read rules to dictionary
@@ -79,7 +79,7 @@ def main():
             # for state in widefindStates...
 
 
-        if config["fibaro"]["enabled"] == False:
+        if config["fibaro"]["enabled"]:
             fibaro_states = fibaro.get_state()
             #fibaro_states = fibaro.get_state_debug() # FOR DEBUG
             for state in fibaro_states:
@@ -88,15 +88,19 @@ def main():
                     for output in output_list:
                         data = output.split("_")
                         name = data[0]
-                        id = data[1]
+                        id = int(data[1])
                         action = data[2]
                         if name == "lamp":
                             if action == "on":
-                                phue.changeLight(255, 0, 0, int(id))
+                                phue.light_on(id)
+                                phue.changeLight(255, 0, 0, id)
                             if action == "off":
-                                phue.lightOff(int(id))
+                                phue.light_off(id)
+                            if action == "yellow":
+                                phue.change_light(255, 0, 0, id)
+                            if action == "purple":
+                                phue.change_light(255, 0, 255, id)
 
-        print("In main")
         time.sleep(1)
 
 
