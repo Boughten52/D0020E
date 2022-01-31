@@ -4,8 +4,6 @@ import paho.mqtt.client as mqtt
 import json
 import numpy as np
 
-from output.phueOutput import PhueOutput
-
 
 class WideFind:
 
