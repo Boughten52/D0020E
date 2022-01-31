@@ -34,9 +34,11 @@ class PhueOutput:
 
 		return [x, y]
 
-	def lightOff(self, light):
-		lights = self.bridge.get_light_objects('id')
-		lights[light].brightness = 0
+	def lightOff(self, lightID):
+		lights = self.bridge.get_light_objects('id' == lightID)
+		for light in lights:
+
+			light.set_light(lightID, "on", False)
 
 	def changeLight(self, r, g, b, light):
 		lights = self.bridge.get_light_objects('id')

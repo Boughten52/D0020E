@@ -3,11 +3,12 @@
 import paho.mqtt.client as mqtt
 import json
 import numpy as np
-
-from output.phueOutput import PhueOutput
+import Observer.ObserverClass
 
 
 class WideFind:
+
+    observer = Observer.ObserverClass
 
     def __init__(self, url: str, port: int):
         self.broker_url = url
@@ -16,8 +17,6 @@ class WideFind:
         self.__client = mqtt.Client()
         self.__client.on_connect = self.__on_connect
         self.__client.on_message = self.__on_message
-
-        self.trackers = {}
 
     def run(self) -> None:
         self.__client.connect(self.broker_url, self.broker_port)
@@ -102,25 +101,76 @@ class WideFind:
         mqtt_message_list = mqtt_message_json["message"].split(',')
         tracker_id = mqtt_message_list[0][7:]
 
-        #Get coordinates
-        list = mqtt_message_list[2:5]
-        vector = np.array([])
+        if (tracker_id == "F1587D88122BE247"):
 
-        #Convert to int
-        for element in list:
-            intElement = int(element)
-            vector = np.append(vector, intElement)
+            #Get coordinates
+            list = mqtt_message_list[2:5]
+            vector = np.array([])
 
-        #If you stand at the tv bench
-        if (vector[0] <= 4400 and vector[0] >= 4000):
-            if (vector[2] <= 700 and vector[2] >= 500):
-                message = "position_001_tv-bänk"
-                return message
-        else:
-            message = "icke_position_001_tv-bänk"
-            return message
+            #Convert to int
+            for element in list:
+                intElement = int(element)
+                vector = np.append(vector, intElement)
+
+            lampDoor = np.array([793, -956, 1650])
+            distanceDoor = np.subtract(vector, lampDoor)
+            distanceDoor = np.linalg.norm(distanceDoor)
+
+            print("hej")
+            """
+            lampTv = np.array([4144, -242, 696])
+            distanceTv = np.subtract(vector, lampTv)
+            distanceTv = np.linalg.norm(distanceTv)
+
+            
+            lampKitchen = np.array([4144, -242, 696])
+            distanceKitchen = np.subtract(vector, lampKitchen)
+            distanceKitchen = np.linalg.norm(distanceKitchen)
+            """
+
+            print("Distance to door: " + distanceDoor)
+            #print("Distance to Tv: " + distanceTv)
+            #print("Distance to Kitchen: " + distanceKitchen)
+            print(vector)
+
+            #Door
+            if distanceDoor < 1500:
+                data = "widefind_1_dörr"
+                self.observer.post_event("Event", data)
+
+
+            """
+            #If you stand at the tv bench
+            if (vector[0] <= 4400 and vector[0] >= 4000):
+                if (vector[2] <= 700 and vector[2] >= 500):
+                    data = "widefind_1_tv-bänk"
+                    self.observer.post_event("Event", data)
+
+
+            else:
+                data = "widefind_1_icke-tv-bänk"
+                self.observer.post_event("Event", data)
+"""
+
+            # If you stand at the door
+            # if (vector[0] <= 1400 and vector[0] >= 1000):
+            #     print("in 1")
+            #    if (vector[2] <= 1800 and vector[2] >= 1400):
+            #        print("in 2")
+            #        data = "widefind_1_dörr"
+            #        self.observer.post_event("Event", data)
+
+
+            #else:
+             #   data = "widefind_1_icke-dörr"
+              #  self.observer.post_event("Event", data)
+
+
 
         return
+
+
+
 
 
         """

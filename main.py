@@ -1,20 +1,32 @@
 import toml
-import time
 
 from Input.Fibaro import Fibaro
 from Input.WidefindInput import WideFind
 from output.phueOutput import PhueOutput
-from Observer.ObserverClass import Subject
-from Observer.ObserverClass import Observer
+import Observer.ObserverClass
 
+observer = Observer.ObserverClass
+
+config = toml.load("config.toml")
+
+# Read rules to dictionary
+currentUserList = "rules_" + str(config["userinfo"]["user"])
+rules = {}
+for i in range(0, len(config[currentUserList]["if"])):
+    if config[currentUserList]["if"][i] in rules:
+        rules[config[currentUserList]["if"][i]].append(config[currentUserList]["then"][i])
+    else:
+        rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
+
+if config["phue"]["enabled"]:
+    print("Using Philips hue")
+    phue = PhueOutput(config["phue"]["ip"])
 
 def main():
+
+    setupEventHandler()
+
     config = toml.load("config.toml")
-
-    subject = Subject()
-    observer = Observer()
-
-    subject.attach(observer)
 
     if config["widefind"]["enabled"]:
         print("Using WideFind")
@@ -30,28 +42,6 @@ def main():
         # for device in fibaro.getOpenDoors():
         #    print(device.id, device.name)
 
-    if config["phue"]["enabled"]:
-        print("Using Philips hue")
-        phue = PhueOutput(config["phue"]["ip"])
-
-    # Read rules to dictionary
-    currentUserList = "rules_" + str(config["userinfo"]["user"])
-    rules = {}
-    for i in range(0, len(config[currentUserList]["if"])):
-        if config[currentUserList]["if"][i] in rules:
-            rules[config[currentUserList]["if"][i]].append(config[currentUserList]["then"][i])
-        else:
-            rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
-
-    ifs = config["rules_0"]["if"]
-    thens = config["rules_0"]["then"]
-
-    message = "position_001_tv-bänk"
-
-    for i, position in enumerate(ifs):
-        if message == position:
-            light = int(thens[i])
-            phue.changeLight(255, 0, 255, light)
 
     # On message:
     # trigger = message_payload
@@ -73,6 +63,7 @@ def main():
     #          if output[name] == "lamp":
     #              if output[action] == "on":
     #                  phue.turnOnLamp(output[id])
+    """
     while True:
         if config["widefind"]["enabled"]:
             widefindStates = widefind.get_state()
@@ -81,6 +72,31 @@ def main():
             fibaroStates = fibaro.get_state()
             # CONTINUE HERE
         time.sleep(1)
+    """
+    while True:
+        pass
+
+
+def eventHandler(data):
+    if data in rules.keys():
+        print("In eventHandler")
+        outputList = rules[data]
+        for output in outputList:
+            message = output.split("_")
+            name = message[0]
+            id = message[1]
+            action = message[2]
+            if name == "lamp":
+                if action == "on":
+                    phue.changeLight(0, 0, 255, int(id))
+                if action == "off":
+                    print("IN")
+                    phue.lightOff(id)
+
+
+
+def setupEventHandler():
+    observer.subscribe("Event", eventHandler)
 
 
 if __name__ == '__main__':
