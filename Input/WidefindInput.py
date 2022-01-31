@@ -116,56 +116,42 @@ class WideFind:
             distanceDoor = np.subtract(vector, lampDoor)
             distanceDoor = np.linalg.norm(distanceDoor)
 
-            print("hej")
-            """
             lampTv = np.array([4144, -242, 696])
             distanceTv = np.subtract(vector, lampTv)
             distanceTv = np.linalg.norm(distanceTv)
 
-            
-            lampKitchen = np.array([4144, -242, 696])
+            lampKitchen = np.array([1029, -5311, 1367])
             distanceKitchen = np.subtract(vector, lampKitchen)
             distanceKitchen = np.linalg.norm(distanceKitchen)
-            """
 
-            print("Distance to door: " + distanceDoor)
-            #print("Distance to Tv: " + distanceTv)
-            #print("Distance to Kitchen: " + distanceKitchen)
             print(vector)
+            print("Distance to door: ", distanceDoor)
+            print("Distance to Tv: ", distanceTv)
+            print("Distance to Kitchen: ", distanceKitchen)
 
             #Door
             if distanceDoor < 1500:
                 data = "widefind_1_dörr"
                 self.observer.post_event("Event", data)
+            else:
+                data = "widefind_1_icke-dörr"
+                self.observer.post_event("Event", data)
 
-
-            """
-            #If you stand at the tv bench
-            if (vector[0] <= 4400 and vector[0] >= 4000):
-                if (vector[2] <= 700 and vector[2] >= 500):
-                    data = "widefind_1_tv-bänk"
-                    self.observer.post_event("Event", data)
-
-
+            # Tv
+            if distanceTv < 1500:
+                data = "widefind_1_tv-bänk"
+                self.observer.post_event("Event", data)
             else:
                 data = "widefind_1_icke-tv-bänk"
                 self.observer.post_event("Event", data)
-"""
 
-            # If you stand at the door
-            # if (vector[0] <= 1400 and vector[0] >= 1000):
-            #     print("in 1")
-            #    if (vector[2] <= 1800 and vector[2] >= 1400):
-            #        print("in 2")
-            #        data = "widefind_1_dörr"
-            #        self.observer.post_event("Event", data)
-
-
-            #else:
-             #   data = "widefind_1_icke-dörr"
-              #  self.observer.post_event("Event", data)
-
-
+            # Kitchen
+            if distanceKitchen < 1500:
+                data = "widefind_1_kitchen"
+                self.observer.post_event("Event", data)
+            else:
+                data = "widefind_1_icke-kitchen"
+                self.observer.post_event("Event", data)
 
         return
 

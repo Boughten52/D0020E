@@ -2,18 +2,18 @@
 user = 0
 
 [widefind]
-enabled = false
+enabled = true
 ip = "130.240.74.55"
 port = 1883
 
 [fibaro]
-enabled = true
+enabled = false
 ip = "http://130.240.114.44/api/"
 user = "unicorn@ltu.se"
 password = "Ks2mpH2Al!"
 
 [phue]
-enabled = false
+enabled = true
 ip = "130.240.114.9"
 
 
@@ -23,10 +23,10 @@ ip = "130.240.114.9"
 #if   = ["position"]
 #then = ["lamp_x_on/off"]
 
-#[rules_0]
-#if =    ["door_42_open", "position_000_kitchen", "door_42_open", "position_001_tv-bänk", "position_001_tv-bänk", "position_001_tv-bänk"]
-#then =  ["lamp_13_on"  , "lamp_2_on"           , "lamp_3_off"  , "13", "14", "15"]
-
 [rules_0]
-if   = ["door_42_open"]
-then = ["lamp_13_on"]
+if =    ["door_42_open", "position_000_kitchen", "door_42_open", "widefind_1_dörr", "widefind_1_tv-bänk", "widefind_1_kitchen", "widefind_1_icke-dörr", "widefind_1_icke-tv-bänk", "widefind_1_icke-kitchen"]
+then =  ["lamp_13_on"  , "lamp_2_on"           , "lamp_3_off"  , "lamp_13_on", "lamp_14_on", "lamp_15_on", "lamp_13_off", "lamp_14_off", "lamp_15_off"]
+
+#[rules_0]
+#if   = ["door_42_open"]
+#then = ["lamp_13_on"]

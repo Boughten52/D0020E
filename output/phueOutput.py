@@ -1,10 +1,7 @@
-import random
-from time import sleep
-
 from phue import Bridge
 
 class PhueOutput:
-	#bridge = Bridge('130.240.114.9')
+	bridge = Bridge('130.240.114.9')
 
 	def __init__(self, ip):
 		# Connect once and press the connect button on the Pilips Hue bridge at the same time
@@ -35,10 +32,9 @@ class PhueOutput:
 		return [x, y]
 
 	def lightOff(self, lightID):
-		lights = self.bridge.get_light_objects('id' == lightID)
+		lights = self.bridge.get_light_objects('id')
 		for light in lights:
-
-			light.set_light(lightID, "on", False)
+			light.set_light(lightID, "off", True)
 
 	def changeLight(self, r, g, b, light):
 		lights = self.bridge.get_light_objects('id')

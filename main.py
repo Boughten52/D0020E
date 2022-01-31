@@ -6,7 +6,8 @@ from Input.WidefindInput import WideFind
 from output.phueOutput import PhueOutput
 import Observer.ObserverClass
 
-observer = Observer.ObserverClass()
+observer = Observer.ObserverClass
+
 
 config = toml.load("config.toml")
 
@@ -25,6 +26,8 @@ for i in range(0, len(config[currentUserList]["if"])):
 
 
 def main():
+
+    setupEventHandler()
 
     if config["widefind"]["enabled"]:
         widefind = WideFind(config["widefind"]["ip"], config["widefind"]["port"])
@@ -62,8 +65,8 @@ def main():
     #              if output[action] == "on":
     #                  phue.turnOnLamp(output[id])
     while True:
-        if config["widefind"]["enabled"]:
-            widefindStates = widefind.get_state()
+        #if config["widefind"]["enabled"]:
+            #widefindStates = widefind.get_state()
             # for state in widefindStates...
 
         if config["fibaro"]["enabled"]:
@@ -86,7 +89,6 @@ def main():
 
 def eventHandler(data):
     if data in rules.keys():
-        print("In eventHandler")
         outputList = rules[data]
         for output in outputList:
             message = output.split("_")
@@ -97,8 +99,10 @@ def eventHandler(data):
                 if action == "on":
                     phue.changeLight(0, 0, 255, int(id))
                 if action == "off":
-                    print("IN")
-                    phue.lightOff(id)
+                    print("off")
+                    #phue.changeLight(255, 0, 255, int(id))
+                    phue.lightOff(int(id))
+                    print("off")
 
 
 
