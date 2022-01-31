@@ -13,7 +13,7 @@ user = "unicorn@ltu.se"
 password = "Ks2mpH2Al!"
 
 [phue]
-enabled = true
+enabled = false
 ip = "130.240.114.9"
 
 
@@ -46,4 +46,4 @@ ip = "130.240.114.9"
 
 [rules_0]
 if   = ["door_42_open"]
-then = ["lamp_14_yellow"]
+then = ["lamp_14_debug"]

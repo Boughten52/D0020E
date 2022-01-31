@@ -13,7 +13,7 @@ class Fibaro:
 
     def getOpenDoors(self):
         openDoors = self.connection.devices.list(
-            baseType = "com.fibaro.doorWindowSensor",
+            baseType="com.fibaro.doorWindowSensor",
             jsonpath="$[?(@.properties.value==True)]")
         return openDoors
 
@@ -28,3 +28,5 @@ class Fibaro:
     def get_state_debug(self):
         state = ["door_42_open"]
         return state
+
+
