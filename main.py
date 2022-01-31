@@ -8,8 +8,23 @@ import Observer.ObserverClass
 
 observer = Observer.ObserverClass()
 
+config = toml.load("config.toml")
+
+if config["phue"]["enabled"]:
+    phue = PhueOutput(config["phue"]["ip"])
+    print("Philips hue connected")
+
+# Read rules to dictionary
+currentUserList = "rules_" + str(config["userinfo"]["user"])
+rules = {}
+for i in range(0, len(config[currentUserList]["if"])):
+    if config[currentUserList]["if"][i] in rules:
+        rules[config[currentUserList]["if"][i]].append(config[currentUserList]["then"][i])
+    else:
+        rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
+
+
 def main():
-    config = toml.load("config.toml")
 
     if config["widefind"]["enabled"]:
         widefind = WideFind(config["widefind"]["ip"], config["widefind"]["port"])
@@ -25,18 +40,6 @@ def main():
         # for device in fibaro.getOpenDoors():
         #    print(device.id, device.name)
 
-    if config["phue"]["enabled"]:
-        phue = PhueOutput(config["phue"]["ip"])
-        print("Philips hue connected")
-
-    # Read rules to dictionary
-    currentUserList = "rules_" + str(config["userinfo"]["user"])
-    rules = {}
-    for i in range(0, len(config[currentUserList]["if"])):
-        if config[currentUserList]["if"][i] in rules:
-            rules[config[currentUserList]["if"][i]].append(config[currentUserList]["then"][i])
-        else:
-            rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
 
     # On message:
     # trigger = message_payload
