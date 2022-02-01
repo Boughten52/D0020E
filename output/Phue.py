@@ -1,4 +1,5 @@
 from phue import Bridge
+import random
 
 
 def rgb_to_xy(red, green, blue):
@@ -28,17 +29,25 @@ class Phue:
         self.lights = self.bridge.get_light_objects('id')
 
     def light_on(self, light):
-        self.bridge.set_light(light, 'on', True)
-        self.lights[light].brightness = 127
+        if not self.bridge.get_light(light, 'on'):
+            self.bridge.set_light(light, 'on', True)
+            self.lights[light].brightness = 255
 
     def light_off(self, light):
-        self.bridge.set_light(light, 'on', False)
+        if self.bridge.get_light(light, 'on'):
+            self.bridge.set_light(light, 'on', False)
 
     def change_light(self, r, g, b, light):
-        self.lights[light].brightness = 127
+        self.light_on(light)
+        self.lights[light].brightness = 255
         self.lights[light].xy = rgb_to_xy(r, g, b)
 
     def change_lights(self, r, g, b):
         for light in self.lights:
-            light.brightness = 127
+            self.light_on(light)
+            light.brightness = 255
             light.xy = rgb_to_xy(r, g, b)
+
+    # ADD FOR ALL LIGHTS AND LOOP
+    def disco(self, light):
+        self.lights[light].xy = [random.random(), random.random()]
