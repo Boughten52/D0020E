@@ -20,12 +20,12 @@ def run(ip, user, password):
         for device in openDoors:
             states.append("door_" + str(device.id) + "_open")
 
-        observer.post_event("Event", states)
+        observer.post_event("Fibaro", states)
         time.sleep(1)
     """
 
     # -------- DEBUG -------- #
     while True:
         #print("DEBUG")
-        observer.post_event("Event", "data") # DATA IS NOT SENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        observer.post_event("Fibaro", "door_42_open")
         time.sleep(1)
