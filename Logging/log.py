@@ -1,3 +1,6 @@
+# Credit: Smriti Gupta
+# Link: https://cppsecrets.com/users/1357411510911410511610510350484964103109971051084699111109/Python-Logging.php
+
 # importing module
 import logging
 
@@ -9,7 +12,7 @@ logging.basicConfig(filename="Logging\\newfile.log",
 # Creating an object
 logger = logging.getLogger()
 
-# Setting the threshold of logger to DEBUG
+# Setting the threshold of logger to INFO
 logger.setLevel(logging.INFO)
 
 """

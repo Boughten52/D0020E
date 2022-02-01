@@ -67,31 +67,30 @@ class WideFind:
             if distanceDoor < 1500:
                 data = "widefind_1_dörr"
                 self.observer.post_event("Event", data)
-                self.log.write_log_info(data)
+                self.log.write_log_info("\n\tData: " + data + " \n\tVector: " + str(vector) + " \n\tDistanceDoor: " + str(distanceDoor))
             else:
                 data = "widefind_1_icke-dörr"
                 self.observer.post_event("Event", data)
-                self.log.write_log_info(data)
+                self.log.write_log_info("\n\tData: " + data + " \n\tVector: " + str(vector) + " \n\tDistanceDoor: " + str(distanceDoor))
 
             # Tv
             if distanceTv < 1500:
                 data = "widefind_1_tv-bänk"
                 self.observer.post_event("Event", data)
-                self.log.write_log_info(data)
+                self.log.write_log_info("\n\tData: " + data + "\n\tVector: " + str(vector) + "\n\tDistanceTv: " + str(distanceTv))
             else:
                 data = "widefind_1_icke-tv-bänk"
                 self.observer.post_event("Event", data)
-                self.log.write_log_info(data)
+                self.log.write_log_info("\n\tData: " + data + "\n\tVector: " + str(vector) + " \n\tDistanceTv: " + str(distanceTv))
 
             # Kitchen
             if distanceKitchen < 1500:
                 data = "widefind_1_kitchen"
                 self.observer.post_event("Event", data)
-                self.log.write_log_info(data)
+                self.log.write_log_info("\n\tData: " + data + " \n\tVector: " + str(vector) + " \n\tDistanceKitchen: " + str(distanceKitchen))
             else:
                 data = "widefind_1_icke-kitchen"
                 self.observer.post_event("Event", data)
-                self.log.write_log_info(data)
-
+                self.log.write_log_info("\n\tData: " + data + " \n\tVector: " + str(vector) + " \n\tDistanceKitchen: " + str(distanceKitchen))
 
         return
