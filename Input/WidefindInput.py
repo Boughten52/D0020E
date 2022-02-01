@@ -25,7 +25,7 @@ class WideFind:
         self.__client.subscribe("ltu-system/#")
 
     def __on_connect(self, client, userdata, flags, rc, properties=None):
-        print("WideFind connected")
+        pass
 
     def zone(self, vector) -> None:
 

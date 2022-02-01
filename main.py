@@ -59,14 +59,12 @@ def event_handler(data):
 
 
 def setup_event_handler():
-    # observer.subscribe("Widefind", event_handler)
     observer.subscribe("Event", event_handler)
 
 
 def lights(id, action):
     if action == "on":
-        #phue.light_on(id)
-        phue.disco(id)
+        phue.light_on(id)
     if action == "off":
         phue.light_off(id)
     if action == "yellow":
