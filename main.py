@@ -70,6 +70,7 @@ def main():
     #              if output[action] == "on":
     #                  phue.turnOnLamp(output[id])
 
+
     """
     while True:
         if config["widefind"]["enabled"]:
