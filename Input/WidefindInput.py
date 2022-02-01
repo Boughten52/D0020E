@@ -25,7 +25,7 @@ class WideFind:
         self.__client.subscribe("ltu-system/#")
 
     def __on_connect(self, client, userdata, flags, rc, properties=None):
-        print("Connected")
+        print("WideFind connected")
 
     def zone(self, vector) -> None:
 
@@ -124,34 +124,34 @@ class WideFind:
             distanceKitchen = np.subtract(vector, lampKitchen)
             distanceKitchen = np.linalg.norm(distanceKitchen)
 
-            print(vector)
-            print("Distance to door: ", distanceDoor)
-            print("Distance to Tv: ", distanceTv)
-            print("Distance to Kitchen: ", distanceKitchen)
+            #print(vector)
+            #print("Distance to door: ", distanceDoor)
+            #print("Distance to Tv: ", distanceTv)
+            #print("Distance to Kitchen: ", distanceKitchen)
 
             #Door
             if distanceDoor < 1500:
                 data = "widefind_1_dörr"
-                self.observer.post_event("Event", data)
+                self.observer.post_event("Widefind", data)
             else:
                 data = "widefind_1_icke-dörr"
-                self.observer.post_event("Event", data)
+                self.observer.post_event("Widefind", data)
 
             # Tv
             if distanceTv < 1500:
                 data = "widefind_1_tv-bänk"
-                self.observer.post_event("Event", data)
+                self.observer.post_event("Widefind", data)
             else:
                 data = "widefind_1_icke-tv-bänk"
-                self.observer.post_event("Event", data)
+                self.observer.post_event("Widefind", data)
 
             # Kitchen
             if distanceKitchen < 1500:
                 data = "widefind_1_kitchen"
-                self.observer.post_event("Event", data)
+                self.observer.post_event("Widefind", data)
             else:
                 data = "widefind_1_icke-kitchen"
-                self.observer.post_event("Event", data)
+                self.observer.post_event("Widefind", data)
 
         return
 

@@ -62,7 +62,8 @@ def setup_event_handler():
 
 def lights(id, action):
     if action == "on":
-        phue.light_on(id)
+        #phue.light_on(id)
+        phue.disco(id)
     if action == "off":
         phue.light_off(id)
     if action == "yellow":
@@ -77,6 +78,9 @@ def lights(id, action):
 
 def main():
     setup_event_handler()
+
+    while True:
+        time.sleep(1)
 
 
 if __name__ == '__main__':
