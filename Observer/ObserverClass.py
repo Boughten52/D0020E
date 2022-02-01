@@ -1,5 +1,5 @@
-
 subscribers = dict()
+
 
 def subscribe(event_type: str, fn):
     if not event_type in subscribers:

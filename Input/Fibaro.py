@@ -1,26 +1,32 @@
+import time
+import Observer.ObserverClass
+
 from fiblary3.client import Client
-import paho.mqtt.client as mqtt
-import json
 
 
-class Fibaro:
+def run(ip, user, password):
+    observer = Observer.ObserverClass
+    connection = Client('v3', ip, user, password)
 
-    def __init__(self, ip, user, password):
-        self.connection = Client('v3', ip, user, password)
-
-    def getOpenDoors(self):
-        openDoors = self.connection.devices.list(
-            baseType = "com.fibaro.doorWindowSensor",
+    """
+    while True:
+        # GET OPEN DOORS
+        openDoors = connection.devices.list(
+            baseType="com.fibaro.doorWindowSensor",
             jsonpath="$[?(@.properties.value==True)]")
-        return openDoors
 
-    def get_state(self):
-        state = []
-        open_doors = self.getOpenDoors()
-        for device in open_doors:
-            state.append("door_" + str(device.id) + "_open")
-        return state
+        # ALL CURRENT STATES
+        states = []
+        for device in openDoors:
+            states.append("door_" + str(device.id) + "_open")
 
-    def get_state_debug(self):
-        state = ["door_42_open"]
-        return state
+        observer.post_event("Fibaro", states)
+        time.sleep(1)
+    """
+
+
+    # -------- DEBUG -------- #
+    while True:
+        #print("DEBUG")
+        observer.post_event("Fibaro", "door_42_open")
+        time.sleep(1)

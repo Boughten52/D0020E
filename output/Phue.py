@@ -27,23 +27,18 @@ class Phue:
         self.bridge.connect()
         self.lights = self.bridge.get_light_objects('id')
 
-
     def light_on(self, light):
         self.bridge.set_light(light, 'on', True)
-        self.lights[light].brightness = 255
-
+        self.lights[light].brightness = 127
 
     def light_off(self, light):
         self.bridge.set_light(light, 'on', False)
 
-
     def change_light(self, r, g, b, light):
-        self.light_on(light)
-        self.lights[light].brightness = 255
+        self.lights[light].brightness = 127
         self.lights[light].xy = rgb_to_xy(r, g, b)
-
 
     def change_lights(self, r, g, b):
         for light in self.lights:
-            self.light_on(light)
-            self.change_light(r, g, b, light)
+            light.brightness = 127
+            light.xy = rgb_to_xy(r, g, b)
