@@ -110,7 +110,22 @@ def fibaro_event_handler(data):
 
 
 def widefind_event_handler(data):
-    print(data)
+    if data in rules.keys():
+    outputList = rules[data]
+    for output in outputList:
+        message = output.split("_")
+        name = message[0]
+        id = message[1]
+        action = message[2]
+        if name == "lamp":
+            if action == "on":
+                phue.change_light(0, 0, 255, int(id))
+                print("On")
+
+            if action == "off":
+                phue.light_off(int(id))
+                #phue.change_lights(200, 0, 255)
+                print("off")
 
 
 def setup_event_handler():
