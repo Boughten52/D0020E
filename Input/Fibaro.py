@@ -21,7 +21,6 @@ def run(ip, user, password):
             states.append("door_" + str(device.id) + "_open")
 
         for state in states:
-            print("State", state)
             observer.post_event("Fibaro", state)
             time.sleep(1)
     """

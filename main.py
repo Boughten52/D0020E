@@ -4,6 +4,7 @@ import os
 import toml
 import time
 import Observer.ObserverClass
+from datetime import datetime
 
 from Input import Fibaro
 from Input.WidefindInput import WideFind
@@ -53,6 +54,8 @@ def event_handler(data):
             action = message[2]
             if name == "lamp":
                 lights(id, action)
+                current_time = datetime.now().strftime("%H:%M:%S")
+                print(current_time, ": ", data)
 
 
 def setup_event_handler():
