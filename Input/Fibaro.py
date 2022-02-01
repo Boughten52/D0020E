@@ -22,7 +22,7 @@ def run(ip, user, password):
 
         for state in states:
             print("State", state)
-            observer.post_event("Fibaro", state)
+            observer.post_event("Event", state)
             time.sleep(1)
     """
 

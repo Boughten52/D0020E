@@ -56,8 +56,8 @@ def event_handler(data):
 
 
 def setup_event_handler():
-    observer.subscribe("Widefind", event_handler)
-    observer.subscribe("Fibaro", event_handler)
+    # observer.subscribe("Widefind", event_handler)
+    observer.subscribe("Event", event_handler)
 
 
 def lights(id, action):
