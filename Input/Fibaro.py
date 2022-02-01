@@ -8,7 +8,7 @@ def run(ip, user, password):
     observer = Observer.ObserverClass
     connection = Client('v3', ip, user, password)
 
-    """
+
     while True:
         # GET OPEN DOORS
         openDoors = connection.devices.list(
@@ -20,8 +20,10 @@ def run(ip, user, password):
         for device in openDoors:
             states.append("door_" + str(device.id) + "_open")
 
-        observer.post_event("Fibaro", states)
-        time.sleep(1)
+        for state in states:
+            print("State", state)
+            observer.post_event("Fibaro", state)
+            time.sleep(1)
     """
 
     # -------- DEBUG -------- #
@@ -29,3 +31,4 @@ def run(ip, user, password):
         #print("DEBUG")
         observer.post_event("Fibaro", "door_42_open")
         time.sleep(1)
+    """
