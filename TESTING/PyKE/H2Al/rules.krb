@@ -1,5 +1,0 @@
-turn_on_lamp_when_door_opened
-    foreach
-        facts.connected($door, $lamp)
-    assert
-        facts.turn_on_lamp($lamp)
