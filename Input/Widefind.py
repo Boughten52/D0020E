@@ -8,7 +8,6 @@ import Logging.log
 
 
 class WideFind:
-
     observer = Observer.ObserverClass
     log = Logging.log
 
@@ -27,7 +26,7 @@ class WideFind:
         self.__client.subscribe("ltu-system/#")
 
     def __on_connect(self, client, userdata, flags, rc, properties=None):
-        print("WideFind connected")
+        pass
 
     def __on_message(self, client, userdata, message):
         mqtt_message_str = message.payload.decode("utf-8")
@@ -37,11 +36,11 @@ class WideFind:
 
         if (tracker_id == "F1587D88122BE247"):
 
-            #Get coordinates
+            # Get coordinates
             list = mqtt_message_list[2:5]
             vector = np.array([])
 
-            #Convert to int
+            # Convert to int
             for element in list:
                 intElement = int(element)
                 vector = np.append(vector, intElement)
@@ -58,12 +57,12 @@ class WideFind:
             distanceKitchen = np.subtract(vector, lampKitchen)
             distanceKitchen = np.linalg.norm(distanceKitchen)
 
-            #print(vector)
-            #print("Distance to door: ", distanceDoor)
-            #print("Distance to Tv: ", distanceTv)
-            #print("Distance to Kitchen: ", distanceKitchen)
+            # print(vector)
+            # print("Distance to door: ", distanceDoor)
+            # print("Distance to Tv: ", distanceTv)
+            # print("Distance to Kitchen: ", distanceKitchen)
 
-            #Door
+            # Door
             if distanceDoor < 1500:
                 data = "widefind_1_dörr"
                 self.observer.post_event("Event", data)

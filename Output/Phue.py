@@ -32,19 +32,19 @@ class Phue:
         if not self.bridge.get_light(light, 'on'):
             self.bridge.set_light(light, 'on', True)
             self.lights[light].brightness = 255
-            print("Light: ", light, " turned on")
+            # print("Light: ", light, " turned on")
 
     def light_off(self, light):
         if self.bridge.get_light(light, 'on'):
             self.bridge.set_light(light, 'on', False)
-            print("Light: ", light, " turned off")
+            # print("Light: ", light, " turned off")
 
     def change_light(self, r, g, b, light):
         if not self.bridge.get_light(light, 'on'):
             self.light_on(light)
             self.lights[light].brightness = 255
             self.lights[light].xy = rgb_to_xy(r, g, b)
-            print("Light: ", light, " changed color")
+            # print("Light: ", light, " changed color")
 
     def change_lights(self, r, g, b):
         for light in self.lights:
@@ -52,11 +52,11 @@ class Phue:
                 self.light_on(light)
                 light.brightness = 255
                 light.xy = rgb_to_xy(r, g, b)
-                print("Light: ", light, " changed color")
+                # print("Light: ", light, " changed color")
 
     # ADD FOR ALL LIGHTS AND LOOP
     def disco(self, light):
         self.light_on(light)
         if self.bridge.get_light(light, 'on'):
             self.lights[light].xy = [random.random(), random.random()]
-            print("DISCO!!")
+            # print("DISCO!!")
