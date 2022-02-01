@@ -34,33 +34,40 @@ if config["phue"]["enabled"]:
     phue = Phue(config["phue"]["ip"])
     print("Philips hue connected")
 
-# -------- READ RULES TO DICTIONARY -------- #
+# -------- READ RULES TO ... -------- #
 currentUserList = "rules_" + str(config["userinfo"]["user"])
-rules = {}
-for i in range(0, len(config[currentUserList]["if"])):
-    if config[currentUserList]["if"][i] in rules:
-        rules[config[currentUserList]["if"][i]].append(config[currentUserList]["then"][i])
-    else:
-        rules[config[currentUserList]["if"][i]] = [config[currentUserList]["then"][i]]
-
+inputName = config[currentUserList]["inputName"]
+outputName = config[currentUserList]["outputName"]
+outputFunction = config[currentUserList]["outputFunction"]
+outputArgument = config[currentUserList]["outputArgument"]
 
 def event_handler(data):
-    if data in rules.keys():
-        outputList = rules[data]
-        for output in outputList:
-            message = output.split("_")
-            name = message[0]
-            id = int(message[1])
-            action = message[2]
-            if name == "lamp":
-                lights(id, action)
-                current_time = datetime.now().strftime("%H:%M:%S")
-                print(current_time, ": ", data)
+    if data in inputName:
+        current_time = datetime.now().strftime("%H:%M:%S")
+        print(current_time, ": ", data)
+        indexList = []
+        i = 0
+        for e in inputName:
+            if data == e:
+                indexList.append(i)
+            i = i + 1
+
+        for index in indexList:
+            eval(outputFunction[index])(outputArgument[index])  # eval is unsafe in a way
+
 
 
 def setup_event_handler():
     observer.subscribe("Event", event_handler)
 
+
+def generalFunction(outputArgument):
+    message = outputArgument.split("_")
+    name = message[0]
+    id = int(message[1])
+    action = message[2]
+    if name == "lamp":
+        lights(id, action)
 
 def lights(id, action):
     if action == "on":
