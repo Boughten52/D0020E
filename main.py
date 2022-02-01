@@ -44,9 +44,11 @@ for i in range(0, len(config[currentUserList]["if"])):
 
 
 def main():
+    setup_event_handler()
+
     while True:
-        print("IN MAIN")
-        time.sleep(1)
+        pass
+
     # On message:
     # trigger = message_payload
     # if trigger in rules:
@@ -102,12 +104,17 @@ def main():
         """
 
 
-def eventHandler(data):
-    print("EVENT HANDLER")
+def fibaro_event_handler(data):
+    print(data)
 
 
-def setupEventHandler():
-    observer.subscribe("Event", eventHandler)
+def widefind_event_handler(data):
+    print(data)
+
+
+def setup_event_handler():
+    observer.subscribe("Widefind", widefind_event_handler)
+    observer.subscribe("Fibaro", fibaro_event_handler)
 
 
 if __name__ == '__main__':
