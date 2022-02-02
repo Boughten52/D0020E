@@ -1,5 +1,3 @@
-# Från grupp 10
-
 import paho.mqtt.client as mqtt
 import json
 import numpy as np
