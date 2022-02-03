@@ -1,12 +1,14 @@
 # Credit: Smriti Gupta
 # Link: https://cppsecrets.com/users/1357411510911410511610510350484964103109971051084699111109/Python-Logging.php
 
+# Link2:https://docs.python.org/3/library/logging.html
+
 # importing module
 import logging
 
 # Create and configure logger
 logging.basicConfig(filename="Logging\\newfile.log",
-                    format='%(asctime)s %(message)s',
+                    format='%(levelname)s %(asctime)s %(message)s',
                     filemode='a')
 
 # Creating an object
@@ -25,6 +27,6 @@ logger.critical("Internet is down")
 """
 
 def write_log_info(message):
-    logger.info(message)
+    logger.info(message+"\n")
 
 
