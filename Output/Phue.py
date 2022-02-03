@@ -23,7 +23,6 @@ def rgb_to_xy(red, green, blue):
 class Phue:
 
     def __init__(self, ip):
-        # Connect once and press the connect button on the Pilips Hue bridge at the same time
         self.bridge = Bridge(ip)
         self.bridge.connect()
         self.lights = self.bridge.get_light_objects('id')
