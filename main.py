@@ -8,7 +8,7 @@ from datetime import datetime
 
 from Input import Fibaro
 from Input.Widefind import WideFind
-from Output.Phue import Phue
+from Output import Output
 
 # -------- INITIALIZE GLOBAL VARIABLES/OBJECTS -------- #
 observer = Observer.ObserverClass
@@ -29,12 +29,9 @@ if config["fibaro"]["enabled"]:
     # Fibaro.run(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
     print("Fibaro connected")
 
-# -------- INSTANTIATE PHUE -------- #
-if config["phue"]["enabled"]:
-    phue = Phue(config["phue"]["ip"])
-    print("Philips hue connected")
-
-# -------- READ RULES TO ... -------- #
+# -------- READ RULES TO LISTS -------- #
+# Rules are stored according to indexing.
+# The output is stored at the corresponding index in a different list to the input.
 currentUserList = "rules_" + str(config["userinfo"]["user"])
 inputName = config[currentUserList]["inputName"]
 outputName = config[currentUserList]["outputName"]
@@ -44,45 +41,21 @@ outputArgument = config[currentUserList]["outputArgument"]
 
 def event_handler(data):
     if data in inputName:
-        current_time = datetime.now().strftime("%H:%M:%S")
-        print(current_time, ": ", data)
-        indexList = []
+        current_time = datetime.now().strftime("%H:%M:%S.%f:")[:-2]
+        print(current_time + ": " + data)
+        index_list = []
         i = 0
         for e in inputName:
             if data == e:
-                indexList.append(i)
+                index_list.append(i)
             i = i + 1
 
-        for index in indexList:
-            eval(outputFunction[index])(outputArgument[index])  # eval is unsafe in a way
+        for index in index_list:
+            eval("Output." + outputFunction[index])(outputArgument[index])  # eval is unsafe in a way
 
 
 def setup_event_handler():
     observer.subscribe("Event", event_handler)
-
-
-def generalFunction(outputArgument):
-    message = outputArgument.split("_")
-    name = message[0]
-    id = int(message[1])
-    action = message[2]
-    if name == "lamp":
-        lights(id, action)
-
-
-def lights(id, action):
-    if action == "on":
-        phue.light_on(id)
-    if action == "off":
-        phue.light_off(id)
-    if action == "yellow":
-        phue.change_light(255, 0, 0, id)
-    if action == "purple":
-        phue.change_light(255, 0, 255, id)
-    if action == "blue":
-        phue.change_light(0, 0, 255, id)
-    if action == "disco":
-        phue.disco(id)
 
 
 def main():

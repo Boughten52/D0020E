@@ -62,21 +62,21 @@ class WideFind:
 
             # Door
             if distanceDoor < 1500:
-                data = "widefind_1_dörr"
+                data = "widefind_1_frontdoor"
                 self.observer.post_event("Event", data)
                 self.log.write_log_info(data)
             else:
-                data = "widefind_1_icke-dörr"
+                data = "widefind_1_NOT-frontdoor"
                 self.observer.post_event("Event", data)
                 self.log.write_log_info(data)
 
             # Tv
             if distanceTv < 1500:
-                data = "widefind_1_tv-bänk"
+                data = "widefind_1_livingroom"
                 self.observer.post_event("Event", data)
                 self.log.write_log_info(data)
             else:
-                data = "widefind_1_icke-tv-bänk"
+                data = "widefind_1_NOT-livingroom"
                 self.observer.post_event("Event", data)
                 self.log.write_log_info(data)
 
@@ -86,7 +86,7 @@ class WideFind:
                 self.observer.post_event("Event", data)
                 self.log.write_log_info(data)
             else:
-                data = "widefind_1_icke-kitchen"
+                data = "widefind_1_NOT-kitchen"
                 self.observer.post_event("Event", data)
                 self.log.write_log_info(data)
 
