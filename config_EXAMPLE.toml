@@ -13,7 +13,7 @@ port = 1883
 enabled = false
 ip = "http://130.240.114.44/api/"
 user = "unicorn@ltu.se"
-password = "test"
+password = "INSERT-PASSWORD-HERE"
 
 [phue]
 enabled = false
