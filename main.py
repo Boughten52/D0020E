@@ -3,71 +3,83 @@ import threading
 import os
 import toml
 import time
-import Observer.ObserverClass
 from datetime import datetime
 
-from Input import Fibaro
+from Observer.ObserverClass import Observer
+from Input.Fibaro import Fibaro
 from Input.Widefind import WideFind
-from Output import Output
+from Output.Output import Output
 
-# -------- INITIALIZE GLOBAL VARIABLES/OBJECTS -------- #
-observer = Observer.ObserverClass
-config = toml.load("config.toml")
+class Main:
 
-# -------- INSTANTIATE WIDEFIND -------- #
-if config["widefind"]["enabled"]:
-    widefind = WideFind(config["widefind"]["ip"], config["widefind"]["port"])
-    widefind.run()
-    print("WideFind connected")
+    def __init__(self):
+        # -------- INITIALIZE GLOBAL VARIABLES/OBJECTS -------- #
+        global observer
+        global output
+        observer = Observer()
+        output = Output()
+        config = toml.load("config.toml")
 
-# -------- START FIBARO LOOP AS THREAD -------- #
-if config["fibaro"]["enabled"]:
-    fibaroThread = threading.Thread(
-        target=Fibaro.run,
-        args=[config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"]])
-    fibaroThread.start()
-    # Fibaro.run(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
-    print("Fibaro connected")
+        # -------- INSTANTIATE WIDEFIND -------- #
+        if config["widefind"]["enabled"]:
+            global widefind
+            widefind = WideFind(config["widefind"]["ip"], config["widefind"]["port"])
+            widefind.run()
+            print("WideFind connected")
 
-# -------- READ RULES TO LISTS -------- #
-# Rules are stored according to indexing.
-# The output is stored at the corresponding index in a different list to the input.
-currentUserList = "rules_" + str(config["userinfo"]["user"])
-inputName = config[currentUserList]["inputName"]
-outputName = config[currentUserList]["outputName"]
-outputFunction = config[currentUserList]["outputFunction"]
-outputArgument = config[currentUserList]["outputArgument"]
+        # -------- START FIBARO LOOP AS THREAD -------- #
+        if config["fibaro"]["enabled"]:
+            global fibaro
+            fibaro = Fibaro(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
+            fibaroThread = threading.Thread(
+                target=fibaro.run)
+            fibaroThread.start()
+            # Fibaro.run(config["fibaro"]["ip"], config["fibaro"]["user"], config["fibaro"]["password"])
+            print("Fibaro connected")
 
-
-def event_handler(data):
-    if data in inputName:
-        current_time = datetime.now().strftime("%H:%M:%S.%f:")[:-2]
-        print(current_time + ": " + data)
-        index_list = []
-        i = 0
-        for e in inputName:
-            if data == e:
-                index_list.append(i)
-            i = i + 1
-
-        for index in index_list:
-            eval("Output." + outputFunction[index])(outputArgument[index])  # eval is unsafe in a way
+        # -------- READ RULES TO LISTS -------- #
+        # Rules are stored according to indexing.
+        # The output is stored at the corresponding index in a different list to the input.
+        currentUserList = "rules_" + str(config["userinfo"]["user"])
+        global inputName
+        global outputName
+        global outputFunction
+        global outputArgument
+        inputName = config[currentUserList]["inputName"]
+        outputName = config[currentUserList]["outputName"]
+        outputFunction = config[currentUserList]["outputFunction"]
+        outputArgument = config[currentUserList]["outputArgument"]
 
 
-def setup_event_handler():
-    observer.subscribe("Event", event_handler)
+    def event_handler(self, data):
+        if data in inputName:
+            current_time = datetime.now().strftime("%H:%M:%S.%f:")[:-2]
+            print(current_time + ": " + data)
+            index_list = []
+            i = 0
+            for e in inputName:
+                if data == e:
+                    index_list.append(i)
+                i = i + 1
+
+            for index in index_list:
+                eval("output." + outputFunction[index])(outputArgument[index])  # eval is unsafe in a way
 
 
-def main():
-    setup_event_handler()
-
-    while True:
-        time.sleep(1)
+    def setup_event_handler(self):
+        observer.subscribe("Event", self.event_handler)
 
 
+    def main(self):
+        self.setup_event_handler()
+
+        while True:
+            time.sleep(1)
+
+m = Main()
 if __name__ == '__main__':
     try:
-        main()
+        m.main()
     except KeyboardInterrupt:
         print('Interrupted')
         try:

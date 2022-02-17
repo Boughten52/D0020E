@@ -1,13 +1,14 @@
 import paho.mqtt.client as mqtt
 import json
 import numpy as np
-import Observer.ObserverClass
-import Logging.log
+
+from Logging.Logger import Logger
+from Observer.ObserverClass import Observer
 
 
 class WideFind:
-    observer = Observer.ObserverClass
-    log = Logging.log
+    observer = Observer()
+    log = Logger()
 
     def __init__(self, url: str, port: int):
         self.broker_url = url

@@ -41,9 +41,9 @@ class Phue:
     def change_light(self, r, g, b, light):
         if not self.bridge.get_light(light, 'on'):
             self.light_on(light)
-            self.lights[light].brightness = 255
-            self.lights[light].xy = rgb_to_xy(r, g, b)
-            # print("Light: ", light, " changed color")
+        self.lights[light].brightness = 255
+        self.lights[light].xy = rgb_to_xy(r, g, b)
+        # print("Light: ", light, " changed color")
 
     def change_lights(self, r, g, b):
         for light in self.lights:
@@ -59,3 +59,8 @@ class Phue:
         if self.bridge.get_light(light, 'on'):
             self.lights[light].xy = [random.random(), random.random()]
             # print("DISCO!!")
+
+
+# phue = Bridge("130.240.114.98")
+# lights = phue.get_light_objects("id")
+# print(lights)
