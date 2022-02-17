@@ -59,8 +59,3 @@ class Phue:
         if self.bridge.get_light(light, 'on'):
             self.lights[light].xy = [random.random(), random.random()]
             # print("DISCO!!")
-
-
-# phue = Bridge("130.240.114.98")
-# lights = phue.get_light_objects("id")
-# print(lights)
