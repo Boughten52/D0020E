@@ -1,9 +1,11 @@
 import time
+
+from Input.Input import Input
 from Observer.ObserverClass import Observer
 from fiblary3.client import Client
 
 
-class Fibaro:
+class Fibaro(Input):
 
     def __init__(self, ip, user, password):
         global observer
@@ -11,6 +13,7 @@ class Fibaro:
         observer = Observer()
         connection = Client('v3', ip, user, password)
 
+    # Method "run" is currently run in its own thread (run is also static)
     def run(self) -> None:
 
         while True:
