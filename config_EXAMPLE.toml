@@ -47,6 +47,15 @@ url = "INSERT-URL-HERE"
 # Discord: 0 is send
 # Actions: send
 # Example: discord_0_send (Specify message as argument)
+#
+# -----------------------------
+#
+# COMBINATION OF INPUT:
+#
+# Input can be combined to form more complex rules.
+# The combinations can theoretically be infinite.
+# Combined rules must follow this syntax (use "&"):
+# Example: "door_42_open&widefind_2_frontdoor"
 
 
 # -------- RULES --------
@@ -66,7 +75,7 @@ outputArgument = ["lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_
 
 # DISCORD TESTS
 [rules_2]
-inputName = ["door_42_open", "door_42_closed"]
-outputName = ["discord_0_send", "discord_0_send"]
-outputFunction = ["discord", "discord"]
-outputArgument = ["The front door has just been opened!", "The front door has just been closed!"]
+inputName = ["door_42_open", "door_42_closed", "widefind_2_frontdoor", "widefind_2_NOT-frontdoor", "door_42_open&widefind_2_frontdoor"]
+outputName = ["discord_0_send", "discord_0_send", "discord_0_send", "discord_0_send", "discord_0_send"]
+outputFunction = ["discord", "discord", "discord", "discord", "discord"]
+outputArgument = ["The front door has just been opened!", "The front door has just been closed!", "There is someone by the front door!", "Someone left the front door!", "Door opened and standing by front door!"]

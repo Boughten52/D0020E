@@ -62,33 +62,51 @@ class Main:
         outputArgument = config[currentUserList]["outputArgument"]
 
     def event_handler(self, data):
+        if data in self.current_states:
+            return
+
+        splitData = data.split("_")
+        name = splitData[0]
+        id = splitData[1]
+        nameAndId = name + "_" + id
+        for state in self.current_states:
+            if state.startswith(nameAndId):
+                self.current_states.remove(state)
+                break
+
+        current_time = datetime.now().strftime("%H:%M:%S.%f:")[:-2]
+        print(current_time + ": " + data)
+
+        self.current_states.append(data)
+        #print("Current states: " + str(self.current_states))
+
+        # Only try to dispatch output if there exists a rule
         if data in inputName:
-            if data in self.current_states:
-                return
+            self.dispatch_output(data)
 
-            splitData = data.split("_")
-            name = splitData[0]
-            id = splitData[1]
-            nameAndId = name + "_" + id
-            for state in self.current_states:
-                if state.startswith(nameAndId):
-                    self.current_states.remove(state)
-                    break
+            # Check for combined input
+            self.find_combined_input(data)
 
-            current_time = datetime.now().strftime("%H:%M:%S.%f:")[:-2]
-            print(current_time + ": " + data)
+    @staticmethod
+    def dispatch_output(data):
+        index_list = []
+        i = 0
+        for e in inputName:
+            if data == e:
+                index_list.append(i)
+            i = i + 1
 
-            self.current_states.append(data)
+        for index in index_list:
+            # print("Dispatching for: " + data)
+            # print(outputArgument[index])
+            eval("output." + outputFunction[index])(outputArgument[index])  # eval is unsafe in a way
 
-            index_list = []
-            i = 0
-            for e in inputName:
-                if data == e:
-                    index_list.append(i)
-                i = i + 1
-
-            for index in index_list:
-                eval("output." + outputFunction[index])(outputArgument[index])  # eval is unsafe in a way
+    def find_combined_input(self, data):
+        for status in inputName:
+            if data + "&" in status or "&" + data in status:
+                split_inputs = status.split("&")
+                if all(item in self.current_states for item in split_inputs):
+                    self.dispatch_output(status)
 
     def setup_event_handler(self):
         observer.subscribe("Event", self.event_handler)
