@@ -1,8 +1,8 @@
 [userinfo]
-user = ["1"]
+user = []
 
 
-[actiive_rule_set]
-rule = ["rules_2"]
+[active_rule_set]
+rule = [""]
 
 

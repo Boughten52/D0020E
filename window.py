@@ -117,7 +117,7 @@ class MyWindow:
         ii = -1
         for e in cd.data:
             i = i + 1
-            if e.keyName == "actiive_rule_set":
+            if e.keyName == "active_rule_set":
                 ii = -1
                 for ee in e.value:
                     ii = ii + 1
@@ -312,7 +312,7 @@ class MyWindow:
         self.changeToLevel(level)
 
         tmp = toml.load("config_new.toml")
-        active_rule = tmp["actiive_rule_set"]["rule"][0]
+        active_rule = tmp["active_rule_set"]["rule"][0]
         str = "active rule now: " + active_rule
         obj = Label(self.win, text=str, font=("Helvetica", 16))
         self.addObject(obj, 0, 7, 0, 0, False)
@@ -406,7 +406,7 @@ class MyWindow:
         ii = -1
         for e in cd.data:
             i = i + 1
-            if e.keyName == "actiive_rule_set":
+            if e.keyName == "active_rule_set":
                 ii = -1
                 for ee in e.value:
                     ii = ii + 1
@@ -420,7 +420,7 @@ class MyWindow:
         cd.writeTo()
 
         tmp = toml.load("config_new.toml")
-        active_rule = tmp["actiive_rule_set"]["rule"][0]
+        active_rule = tmp["active_rule_set"]["rule"][0]
         str = "active rule now: " + active_rule
         obj = Label(self.win, text=str, font=("Helvetica", 16))
         self.addObject(obj, 0, 7, 0, 0, False)
@@ -452,7 +452,7 @@ class MyWindow:
             ii = -1
             for e in cd.data:
                 i = i + 1
-                if e.keyName == "actiive_rule_set":
+                if e.keyName == "active_rule_set":
                     ii = -1
                     for ee in e.value:
                         ii = ii + 1
