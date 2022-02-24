@@ -522,6 +522,16 @@ class MyWindow:
 
 window = Tk()
 mywin = MyWindow(window)
-window.title('Hello Python')
-window.geometry("700x700+10+20")
+window.title("H2Al Rules")
+
+window_height = 800
+window_width = 1500
+
+screen_width = window.winfo_screenwidth()
+screen_height = window.winfo_screenheight()
+
+x = int((screen_width/2) - (window_width/2))
+y = int((screen_height/2) - (window_height/2))
+
+window.geometry("{}x{}+{}+{}".format(window_width, window_height, x, y))
 window.mainloop()
