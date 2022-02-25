@@ -7,7 +7,7 @@ from discord import Webhook, RequestsWebhookAdapter
 class Output:
 
     def __init__(self):
-        config = toml.load("config.toml")
+        config = toml.load("config_EXAMPLE.toml")
 
         # -------- INSTANTIATE PHUE -------- #
         if config["phue"]["enabled"]:
@@ -15,10 +15,12 @@ class Output:
             phue = Phue(config["phue"]["ip"])
             print("Philips hue connected")
 
+        """
         # -------- INSTANTIATE DISCORD -------- #
         if config["discord"]["enabled"]:
             global webhook
             webhook = Webhook.from_url(config["discord"]["url"], adapter=RequestsWebhookAdapter())
+        """
 
     def lamps(self, output_argument):
         message = output_argument.split("_")
@@ -45,7 +47,8 @@ class Output:
                 phue.disco(id)
                 # print("Light " + str(id) + " disco")
 
+    """
     def discord(self, output_argument):
         message = output_argument
         webhook.send(message)
-
+    """

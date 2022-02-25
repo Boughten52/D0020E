@@ -22,7 +22,7 @@ class Main:
         global output
         observer = Observer()
         output = Output()
-        config = toml.load("config.toml")
+        config = toml.load("config_EXAMPLE.toml")
 
         # -------- INSTANTIATE SIMULATOR -------- #
         if config["simulator"]["enabled"]:
@@ -78,35 +78,46 @@ class Main:
         print(current_time + ": " + data)
 
         self.current_states.append(data)
-        #print("Current states: " + str(self.current_states))
+        print("Current states: " + str(self.current_states))
 
         # Only try to dispatch output if there exists a rule
         if data in inputName:
-            self.dispatch_output(data)
+            index = inputName.index(data)
+            self.dispatch_output(data, index)
 
             # Check for combined input
             self.find_combined_input(data)
 
-    @staticmethod
-    def dispatch_output(data):
-        index_list = []
-        i = 0
-        for e in inputName:
-            if data == e:
-                index_list.append(i)
-            i = i + 1
 
-        for index in index_list:
-            # print("Dispatching for: " + data)
-            # print(outputArgument[index])
-            eval("output." + outputFunction[index])(outputArgument[index])  # eval is unsafe in a way
+    def dispatch_output(self, data ,index):
+        if (self.find_combined_output(outputArgument[index])):
+            split_outputArgument = outputArgument[index].split("&")
+            for output in split_outputArgument:
+                print("Output ", output)
+                #eval("output." + outputFunction[index])(output)
+
+        else:
+            #print("Dispatching for: " + data)
+            print("outputArgument: ", outputArgument[index])
+            #eval("output." + outputFunction[index])(outputArgument[index])  # eval is unsafe in a way
+
+    def runOutput(self, status):
+        return
+
 
     def find_combined_input(self, data):
         for status in inputName:
             if data + "&" in status or "&" + data in status:
                 split_inputs = status.split("&")
                 if all(item in self.current_states for item in split_inputs):
-                    self.dispatch_output(status)
+                    index = inputName.index(status)
+                    self.dispatch_output(status, index)
+
+    def find_combined_output(self, data):
+        for status in outputArgument:
+            if "&" in status:
+                return True
+        return False
 
     def setup_event_handler(self):
         observer.subscribe("Event", self.event_handler)

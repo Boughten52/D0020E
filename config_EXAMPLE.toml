@@ -1,5 +1,5 @@
 [userinfo]
-user = 2
+user = 1
 
 [simulator]
 enabled = true
@@ -20,7 +20,7 @@ enabled = false
 ip = "130.240.114.98"
 
 [discord]
-enabled = true
+enabled = false
 url = "INSERT-URL-HERE"
 
 
@@ -68,10 +68,10 @@ outputArgument =    ["lamp_4_disco",          "lamp_2_disco",       "lamp_4_off"
 
 # LAMPS ON WHEN FRONT DOOR OPEN, OFF WHEN FRONT DOOR CLOSED
 [rules_1]
-inputName = ["door_42_open", "door_42_closed", "door_42_open", "door_42_closed", "door_42_open", "door_42_closed"]
+inputName = ["door_42_open&widefind_2_frontdoor", "widefind_2_frontdoor", "door_42_open", "door_42_closed", "door_43_open", "door_42_closed"]
 outputName = ["lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off"]
 outputFunction = ["lamps", "lamps", "lamps", "lamps", "lamps", "lamps"]
-outputArgument = ["lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off"]
+outputArgument = ["lamp_2_on&lamp_3_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off"]
 
 # DISCORD TESTS
 [rules_2]
