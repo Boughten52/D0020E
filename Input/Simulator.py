@@ -18,7 +18,6 @@ class Simulator(Input):
             time.sleep(1)
             self.observer.post_event("Event", "widefind_2_frontdoor")
             time.sleep(3)
-            """
             self.observer.post_event("Event", "door_42_closed")
             time.sleep(5)
             self.observer.post_event("Event", "widefind_2_NOT-frontdoor")
@@ -59,4 +58,3 @@ class Simulator(Input):
             time.sleep(1)
             self.observer.post_event("Event", "door_42_closed")
             time.sleep(10)
-            """
