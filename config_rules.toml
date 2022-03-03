@@ -1,3 +1,10 @@
+[userinfo]
+user = 2
+currentRule = "rules_0"
+
+[simulator]
+enabled = true
+
 [rules_0]
 inputName = ["widefind_3_livingroom","widefind_1_kitchen","widefind_3_NOT-livingroom","widefind_1_NOT-kitchen","door_42_open","door_42_closed"]
 outputName = ["lamp_4_disco","lamp_2_disco","lamp_4_off","lamp_2_off","lamp_3_disco","lamp_3_off"]

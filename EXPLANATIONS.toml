@@ -1,29 +1,3 @@
-[userinfo]
-user = 2
-
-[simulator]
-enabled = true
-
-[widefind]
-enabled = false
-ip = "130.240.74.55"
-port = 1883
-
-[fibaro]
-enabled = false
-ip = "http://130.240.114.44/api/"
-user = "unicorn@ltu.se"
-password = "INSERT-PASSWORD-HERE"
-
-[phue]
-enabled = false
-ip = "130.240.114.98"
-
-[discord]
-enabled = true
-url = "INSERT-URL-HERE"
-
-
 # -------- EXPLANATIONS --------
 #
 # INPUT:

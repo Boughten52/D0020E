@@ -23,9 +23,10 @@ class Main:
         observer = Observer()
         output = Output()
         config = toml.load("config.toml")
+        config_rules = toml.load("config_rules.toml")
 
         # -------- INSTANTIATE SIMULATOR -------- #
-        if config["simulator"]["enabled"]:
+        if config_rules["simulator"]["enabled"]:
             simulator = Simulator()
             simulatorThread = threading.Thread(target=simulator.run)
             simulatorThread.start()
@@ -51,15 +52,15 @@ class Main:
         # -------- READ RULES TO LISTS -------- #
         # Rules are stored according to indexing.
         # The output is stored at the corresponding index in a different list to the input.
-        currentUserList = "rules_" + str(config["userinfo"]["user"])
+        currentUserList = str(config_rules["userinfo"]["currentRule"])
         global inputName
         global outputName
         global outputFunction
         global outputArgument
-        inputName = config[currentUserList]["inputName"]
-        outputName = config[currentUserList]["outputName"]
-        outputFunction = config[currentUserList]["outputFunction"]
-        outputArgument = config[currentUserList]["outputArgument"]
+        inputName = config_rules[currentUserList]["inputName"]
+        outputName = config_rules[currentUserList]["outputName"]
+        outputFunction = config_rules[currentUserList]["outputFunction"]
+        outputArgument = config_rules[currentUserList]["outputArgument"]
 
     def event_handler(self, data):
         if data in self.current_states:
