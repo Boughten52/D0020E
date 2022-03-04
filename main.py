@@ -79,7 +79,6 @@ class Main:
         print(current_time + ": " + data)
 
         self.current_states.append(data)
-        #print("Current states: " + str(self.current_states))
 
         # Only try to dispatch output if there exists a rule
         if data in inputName:
@@ -98,8 +97,6 @@ class Main:
             i = i + 1
 
         for index in index_list:
-            # print("Dispatching for: " + data)
-            # print(outputArgument[index])
             eval("output." + outputFunction[index])(outputArgument[index])  # eval is unsafe in a way
 
     def find_combined_input(self, data):

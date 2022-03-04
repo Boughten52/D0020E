@@ -37,7 +37,6 @@ class Fibaro(Input):
                 states.append("door_" + str(device.id) + "_closed")
 
             for state in states:
-                # print("State", state)
                 observer.post_event("Event", state)
             time.sleep(1)
 
