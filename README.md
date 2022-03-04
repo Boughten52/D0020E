@@ -7,4 +7,4 @@ in the Human Health and Activity Laboratory (H2Al) at LTU. H2Al is like a smart 
 sensors and tools, and it is used for e.g. studying human behaviour. The lab is currently lacking a system that
 easily connects different types of sensors and this project aims to meet that need.
 
-Refer to the [GitHub Page](https://boughten52.github.io/D0020E/) for installation and run instructions as well as how to add new input and output.
+Refer to the [GitHub Page](https://boughten52.github.io/D0020E/) for installation and run instructions as well as instructions on how to add new input or output.
