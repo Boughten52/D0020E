@@ -5,3 +5,4 @@
 - Instructions for adding input and output (with code and images)
 - Update diagram for system architecture (make one in English as well)
 - Table of contents?
+- Remove syntax reference
