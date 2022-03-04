@@ -1,4 +1,4 @@
-## Introduction
+## Rule-Based Activity Recognition
 
 This project aims to provide rule-based activity recognition by using different sensors in the smart home environment called [Human Health and Activity Laboratory (H2Al)](https://www.researchgate.net/publication/328472171_H2Al-The_Human_Health_and_Activity_Laboratory) at [Luleå University of Technology (LTU)](https://www.ltu.se/). The project also aims to provide a way to easily connect different types of sensor data in the lab.
 
