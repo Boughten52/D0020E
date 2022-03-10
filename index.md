@@ -14,39 +14,55 @@ Then
 
 A scenario could be a lot simpler or a lot more complex than this.
 
-## Currently Supported Input
+## Table of Contents
+
+- [Currently Supported Input](#currently_supported_input)
+  - [WideFind](#widefind)
+  - [Z-Wave (Fibaro)](#z-wave)
+  - [Simulator](#simulator)
+- [Currently Supported Output](#currently_supported_output)
+  - [Philips Hue](#philips_hue)
+  - [Discord](#discord)
+- [Installation](#installation)
+  - [Creating the Config File](#creating_the_config_file)
+- [Running the Application](#running_the_application)
+- [System Architecture](#system_architecture)
+- [Adding New Input](#add_input)
+- [Adding New Output](#add_output)
+
+## <a name="currently_supported_input"></a>Currently Supported Input
 
 H2Al contains a number of different sensors which can provide input data for the rules. The are more sensors in the lab than the ones listed below, and we have tried to make it as easy as possible for a programmer to add new input sensors. This process is explained in the section [Adding New Input](#add_input). Input data is not restricted to only the type of sensor data found in the lab.
 
-### WideFind
+### <a name="widefind"></a>WideFind
 
 WideFind is a swedish positional system developed in Luleå. The system uses reference points to track a wireless receiver in a room. In this project we use vectors to measure the distance between the receiver and different objects in order to approximate where in the lab a receiver is located.
 
-### Z-Wave (Fibaro)
+### <a name="z-wave"></a>Z-Wave (Fibaro)
 
 In H2Al, Z-Wave sensors are found in e.g. doors and cabinets. Door sensors hold an internal states which says if the door is open or closed. The sensors are configured with a Fibaro Home Center 3 hub. Data, such as states, can be gathered from the Fibaro hub. We have not managed to make Fibaro send events when a state is changed so instead we use a thread which simulates an event once per second by gathering and forwarding the internal states. There are many other sensors configured with Fibaro (such as thermometers, moisture meters, power sockets etc.), but we have only managed to make the door and cabinet sensors work.
 
-### Simulator
+### <a name="simulator"></a>Simulator
 
 A simulator is provided for simulating a simple scenario. The simulator sends "fake" Z-Wave and WideFind data to the application and it can be used to test functionality. By changing the `Simulator.py` class it is possible to change to simulated events to one's liking. The simulator executes in its own thread.
 
-## Currently Supported Output
+## <a name="currently_supported_output"></a>Currently Supported Output
 
 Some gadgets in the lab can be used as output for a rule if we not only want to recognice a certain activity, but also have something happen during that activity. The processes of adding new output is explained in the section [Adding New Output](#add_output). An output could be virtually anything and is not restricted to be something in the lab.
 
-### Philips Hue
+### <a name="philips_hue"></a>Philips Hue
 
 Philips Hue is a smart lighting system with highly configurable light bulbs. By connecting to a bridge it is possible to change the brightness and color of a light bulb.
 
-### Discord
+### <a name="discord"></a>Discord
 
 By creating a webhook in a Discord server and connecting to that webhook it is possible to send messages to the server. This could be used to receive live updates from the lab while not being present there.
 
-## Installation
+## <a name="installation"></a>Installation
 
 _To be added_
 
-### Creating the Config File
+### <a name="creating_the_config_file"></a>Creating the Config File
 
 In order for the application to connect to the different sensors and gadgets, it is necessary to create a config file in the application root directory and call it `config.toml`. This file must look exactly like this:
 
@@ -73,11 +89,11 @@ url = "..."
 
 Replace the dots with the necessary information. When adding new input or output functionality it is recommended to add connection information, such as ip addresses or URL:s, to the `config.toml` in the same way as shown above and then read the information to the main application. This should be done to keep sensitive information from being displayed in the application itself. Full tutorials for adding input and output can be found in sections [Adding New Input](#add_input) and [Adding New Output](#add_output).
 
-## Running the Application
+## <a name="running_the_application"></a>Running the Application
 
 See `EXPLANATIONS.toml` for mapping between ID and physical object. For example door 42 is the front door to H2Al. `EXPLANATIONS.toml` should also be updated when new input or output is added to make it clear which ID corresponds to which object.
 
-## System Architecture
+## <a name="system_architecture"></a>System Architecture
 
 The class diagram below presents an overview of the system architecture.
 
