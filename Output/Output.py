@@ -7,7 +7,7 @@ from discord import Webhook, RequestsWebhookAdapter
 class Output:
 
     def __init__(self):
-        config = toml.load("config_EXAMPLE.toml")
+        config = toml.load("config.toml")
 
         # -------- INSTANTIATE PHUE -------- #
         if config["phue"]["enabled"]:
