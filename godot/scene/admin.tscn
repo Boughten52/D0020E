@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://godot/TTF/new_theme_font.tres" type="Theme" id=1]
+[ext_resource path="res://godot/scene/HomeButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://godot/scene/admin.gd" type="Script" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="HomeButton" parent="." instance=ExtResource( 2 )]
+margin_left = -24.276
+margin_top = 9.36
+margin_right = 51.724
+margin_bottom = 79.3601
+
+[node name="EditAllRulesetsButton" type="Button" parent="."]
+margin_left = 92.4955
+margin_top = 71.4738
+margin_right = 551.496
+margin_bottom = 122.474
+text = "See All Rulesets [ Edit Them]"
+
+[node name="AddNewInOutButton" type="Button" parent="."]
+margin_left = 98.1013
+margin_top = 227.034
+margin_right = 459.101
+margin_bottom = 278.034
+text = "Add New Input/Output"
+
+[node name="Button3" type="Button" parent="."]
+margin_left = 92.4956
+margin_top = 391.004
+margin_right = 507.496
+margin_bottom = 442.004
+text = "Edit existing Input/Output"
+
+[connection signal="pressed" from="EditAllRulesetsButton" to="." method="_on_EditAllRulesetsButton_pressed"]

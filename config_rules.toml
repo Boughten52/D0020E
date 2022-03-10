@@ -1,40 +1,42 @@
-[rules_0]
-inputName = ["widefind_3_livingroom","widefind_1_kitchen","widefind_3_NOT-livingroom","widefind_1_NOT-kitchen","door_42_open","door_42_closed"]
-outputName = ["lamp_4_disco","lamp_2_disco","lamp_4_off","lamp_2_off","lamp_3_disco","lamp_3_off"]
-outputFunction = ["lamps","lamps","lamps","lamps","lamps","lamps"]
-outputArgument = ["lamp_4_disco","lamp_2_disco","lamp_4_off","lamp_2_off","lamp_3_disco","lamp_3_off"]
+[userinfo]
 
+currentRule="rules_0"
+
+[simulator]
+
+enabled=false
+
+[rules_0]
+
+inputName=[ "widefind_3_livingroom", "widefind_1_kitchen", "widefind_3_NOT-livingroom", "widefind_1_NOT-kitchen", "door_42_open", "door_42_closed" ]
+outputName=[ "lamp_4_disco", "lamp_2_disco", "lamp_4_off", "lamp_2_off", "lamp_3_disco", "lamp_3_off" ]
+outputFunction=[ "lamps", "lamps", "lamps", "lamps", "lamps", "lamps" ]
+outputArgument=[ "lamp_4_disco", "lamp_2_disco", "lamp_4_off", "lamp_2_off", "lamp_3_disco", "lamp_3_off" ]
 
 [rules_1]
-inputName = ["door_42_open","door_42_closed","door_42_open","door_42_closed","door_42_open","door_42_closed"]
-outputName = ["lamp_2_on","lamp_2_off","lamp_3_on","lamp_3_off","lamp_4_on","lamp_4_off"]
-outputFunction = ["lamps","lamps","lamps","lamps","lamps","lamps"]
-outputArgument = ["lamp_2_on","lamp_2_off","lamp_3_on","lamp_3_off","lamp_4_on","lamp_4_off"]
 
+inputName=[ "door_42_open", "door_42_closed", "door_42_open", "door_42_closed", "door_42_open", "door_42_closed" ]
+outputName=[ "lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off" ]
+outputFunction=[ "lamps", "lamps", "lamps", "lamps", "lamps", "lamps" ]
+outputArgument=[ "lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off" ]
 
 [rules_2]
-inputName = ["door_42_open","door_42_closed"]
-outputName = ["discord_0_send","discord_0_send"]
-outputFunction = ["discord","discord"]
-outputArgument = ["The front door has just been opened!","The front door has just been closed!"]
 
+inputName=[ "door_42_open", "door_42_closed" ]
+outputName=[ "discord_0_send", "discord_0_send" ]
+outputFunction=[ "discord", "discord" ]
+outputArgument=[ "The front door has just been opened!", "The front door has just been closed!" ]
 
-[rules_3_apa]
-inputName = []
-outputName = []
-outputFunction = []
-outputArgument = []
+[rules_4]
 
+inputName=[ "widefind_2_frontdoor&door_42_open" ]
+outputName=[ "discord_0_send" ]
+outputFunction=[ "discord" ]
+outputArgument=[ "Hello" ]
 
-[rules_3_test]
-inputName = ["apa"]
-outputName = ["fisk"]
-outputFunction = ["mat","circus"]
-outputArgument = ["matte"]
+[rules_5]
 
-
-[rules_3_test2]
-inputName = ["apa"]
-outputName = ["fisk"]
-outputFunction = ["mat","circus"]
-outputArgument = ["matte"]
+inputName=[ "apa" ]
+outputName=[ "fisk" ]
+outputFunction=[ "mat", "circus" ]
+outputArgument=[ "matte" ]

@@ -1,28 +1,24 @@
 [input]
-input = ["widefind_3_livingroom", "widefind_1_kitchen", "widefind_3_NOT-livingroom", "widefind_1_NOT-kitchen", "door_42_open", "door_42_closed"]
-comment = ["widefind_3_livingroom", "widefind_1_kitchen", "widefind_3_NOT-livingroom", "widefind_1_NOT-kitchen", "door_42_open", "door_42_closed"]
-
+input = [
+    "widefind_1_kitchen",  "widefind_1_NOT-kitchen", "widefind_2_frontdoor", "widefind_2_NOT-frontdoor", "widefind_3_livingroom",  "widefind_3_NOT-livingroom",
+    "door_31_open", "door_31_closed", "door_34_open", "door_34_closed", "door_37_open", "door_37_closed", "door_42_open", "door_42_closed",
+    "door_50_open", "door_50_closed", "door_55_open", "door_55_closed", "door_58_open", "door_58_closed", "door_63_open", "door_63_closed"
+]
 
 [predefined_outputArgument]
-outputName = ["lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off"
-,"lamp_2_green","lamp_2_purple","lamp_2_blue","lamp_2_disco"
-,"lamp_3_green","lamp_3_purple","lamp_3_blue","lamp_3_disco"
-,"lamp_4_green","lamp_4_purple","lamp_4_blue","lamp_4_disco"]
-comment = ["lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off"
-,"lamp_2_green","lamp_2_purple","lamp_2_blue","lamp_2_disco"
-,"lamp_3_green","lamp_3_purple","lamp_3_blue","lamp_3_disco"
-,"lamp_4_green","lamp_4_purple","lamp_4_blue","lamp_4_disco"]
-outputFunction = ["lamps", "lamps", "lamps", "lamps", "lamps", "lamps"
-,"lamps","lamps","lamps","lamps"
-,"lamps","lamps","lamps","lamps"
-,"lamps","lamps","lamps","lamps"]
-outputArgument = ["lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off"
-,"lamp_2_green","lamp_2_purple","lamp_2_blue","lamp_2_disco"
-,"lamp_3_green","lamp_3_purple","lamp_3_blue","lamp_3_disco"
-,"lamp_4_green","lamp_4_purple","lamp_4_blue","lamp_4_disco"]
-
+outputName = [
+    "lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off","lamp_2_green","lamp_2_purple","lamp_2_blue","lamp_2_disco",
+    "lamp_3_green","lamp_3_purple","lamp_3_blue","lamp_3_disco", "lamp_4_green","lamp_4_purple","lamp_4_blue","lamp_4_disco"
+]
+outputFunction = [
+    "lamps", "lamps", "lamps", "lamps", "lamps", "lamps", "lamps","lamps","lamps","lamps",
+    "lamps","lamps","lamps","lamps", "lamps","lamps","lamps","lamps"
+]
+outputArgument = [
+    "lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off", "lamp_2_green","lamp_2_purple","lamp_2_blue","lamp_2_disco",
+    "lamp_3_green","lamp_3_purple","lamp_3_blue","lamp_3_disco", "lamp_4_green","lamp_4_purple","lamp_4_blue","lamp_4_disco"
+]
 
 [general_outputArgument]
 outputName = ["discord_0_send"]
 outputFunction = ["discord"]
-comment = ["discord_0_send"]
