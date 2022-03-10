@@ -33,6 +33,7 @@
 
 
 # -------- RULES --------
+# The three rulesets provided below are only examples of how the config files are structured, they are never used
 
 [rules_0]
 inputName =         ["widefind_3_livingroom", "widefind_1_kitchen", "widefind_3_NOT-livingroom", "widefind_1_NOT-kitchen", "door_42_open", "door_42_closed"]
