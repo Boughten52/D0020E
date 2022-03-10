@@ -2,9 +2,9 @@
 #
 # INPUT:
 #
-# Widefind: 1 is kitchen, 2 is livingroom, 3 is frontdoor
+# Widefind: 1 is kitchen, 2 is frontdoor, 3 is livingroom
 # Status: kitchen, livingroom, frontdoor, NOT-kitchen, NOT-livingroom, NOT-frontfoor
-# Example: position_1_kitchen
+# Example: widefind_1_kitchen
 #
 # Fibaro: 31: microwave, 34: cupboard above dish stand, 37: cupboard above crane, 42: front door, 50: fridge, 55: cupboard left of crane, 58: ?, 63: cupboard above microwave
 # Status: open, closed

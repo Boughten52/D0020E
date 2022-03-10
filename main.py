@@ -84,8 +84,8 @@ class Main:
         if data in inputName:
             self.dispatch_output(data)
 
-            # Check for combined input
-            self.find_combined_input(data)
+        # Check for combined input
+        self.find_combined_input(data)
 
     @staticmethod
     def dispatch_output(data):
