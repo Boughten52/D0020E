@@ -60,7 +60,13 @@ By creating a webhook in a Discord server and connecting to that webhook it is p
 
 ## <a name="installation"></a>Installation
 
-_To be added_
+- Clone the main branch of the project repository or download it as a Zip
+- Create a file called `config.toml` in the root directory (see [Creating the Config File](#creating_the_config_file))
+- On Windows:
+  - Run `D0020E_Interface.exe`
+- On other operating systems:
+  - Download [Godot Engine](https://godotengine.org/) and use it to open the project file `project.godot`
+  - Compile the project for your operating system
 
 ### <a name="creating_the_config_file"></a>Creating the Config File
 
@@ -91,7 +97,15 @@ Replace the dots with the necessary information. When adding new input or output
 
 ## <a name="running_the_application"></a>Running the Application
 
-See `EXPLANATIONS.toml` for mapping between ID and physical object. For example door 42 is the front door to H2Al. `EXPLANATIONS.toml` should also be updated when new input or output is added to make it clear which ID corresponds to which object.
+When starting `D0020E_Interface.exe` the user will be presented with three choices: `USER`, `TEST` and `ADMIN`. No rulesets are defined when starting for the first time so press `USER` and then `Add New` to make new rules. Name your ruleset to `rule_#`, replacing the hash with any text. Then choose desired input and desired output for a rule. Input and ouput can be combined in any manner. Press `Save` to save this rule to the specified ruleset. If you want to add more rules to this set, choose the newly created ruleset, choose input and output and press save again. Add as many rules as you like. If `discord_0_send` is chosen you will have to write a message to send to the Discord webhook in the box `OutPut Argument for General`.
+
+See `EXPLANATIONS.toml` for mapping between ID and physical object. Door 42 is for example the front door to H2Al. `EXPLANATIONS.toml` should also be updated when new input or output is added to make it clear which ID corresponds to which object.
+
+Press the cogwheel to go back and press `USER` again to see all created rulesets. Choose your ruleset and press `Run Selected Rule` to start the application for the selected ruleset. Press `Stop Selected Rule` to stop the application. Rulesets can be changed and removed.
+
+If you want to run a simulator in order to test a specific ruleset, go to the start menu and choose `TEST`. Choose the ruleset you want to test and press `Run Simulator` to start the simulation. The simulator's default configuration is to send Z-Wave door and WideFind position updates for about a minute. The simuator can be edited by changing the messages in the file `/Input/Simulator.py`.
+
+The `ADMIN` panel currently doesn't let you do anything special. Here you can also modify rulesets like on the `USER` panel and the plan is to expand it sometime in the future.
 
 ## <a name="system_architecture"></a>System Architecture
 
@@ -103,7 +117,7 @@ When running the program `D0020E_Interface.exe` it reads all defined input and o
 
 ## <a name="add_input"></a>Adding New Input
 
-_To be added_
+These last two sections are intended for administrators and those who have some programming knowledge as they involve changing the source code and thereby the program structure.
 
 ## <a name="add_output"></a>Adding New Output
 
