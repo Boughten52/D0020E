@@ -62,8 +62,10 @@ func loadFilePaths():
 	for path in content.split("\n"):
 		if path.begins_with("filepath_allRuleDoc"):
 			filepath_allRuleDoc = path.substr(path.find("=") + 1)
+			print("ALL:",filepath_allRuleDoc)
 		if path.begins_with("filepath_rulesets"):
 			print("foundSets")
 			filepath_rulesets = path.substr(path.find("=") + 1)
+			print("RULE:",filepath_rulesets)
 	
 	

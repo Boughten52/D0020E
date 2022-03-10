@@ -1,2 +1,2 @@
-filepath_allRuleDoc = res://godot/files/documentation.toml
-filepath_rulesets = res://godot/files/config_rules.toml
+filepath_allRuleDoc = documentation.toml
+filepath_rulesets = config_rules.toml

@@ -15,7 +15,7 @@ run/main_scene="res://godot/scene/main.tscn"
 boot_splash/image="res://godot/images/splashScreen.png"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://godot/images/administration-gbd025500f_640.png"
-config/windows_native_icon="res://images/D0020E_icon.ico"
+config/windows_native_icon="res://godot/images/D0020E_icon.ico"
 
 [autoload]
 
@@ -26,6 +26,10 @@ GlobalRulesets="*res://godot/global/global_Rulesets.gd"
 [gui]
 
 theme/custom_font="res://godot/TTF/new_dynamicfont.tres"
+
+[logging]
+
+file_logging/enable_file_logging.pc=false
 
 [physics]
 

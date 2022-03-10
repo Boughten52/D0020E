@@ -47,8 +47,3 @@ func _button_pressed_ADMIN():
 	GlobalAllRuleDoc.initializeConfig_allRuleDoc()
 	get_tree().change_scene("res://godot/scene/admin.tscn")
 	#GlobalValues.updateAllRules()
-
-
-func _on_Button_pressed():
-	GlobalValues.filepath_rulesets = self.get_node("TextEdit").text
-	print(GlobalValues.filepath_rulesets)

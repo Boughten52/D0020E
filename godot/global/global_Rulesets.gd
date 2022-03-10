@@ -22,7 +22,7 @@ func initializeConfig_rulesets():
 	GlobalValues.rulesets = sections
 	#print(GlobalValues.rulesets)
 	
-	GlobalValues.activeRule = GlobalValues.config_rulesets.get_value("userinfo", "activeRule")
+	GlobalValues.activeRule = GlobalValues.config_rulesets.get_value("userinfo", "currentRule")
 	#print(GlobalValues.activeRule)
 
 
@@ -30,7 +30,7 @@ func initializeConfig_rulesets():
 func updateActiveRuleset(rulename="No Rule selected"):
 	initializeConfig_rulesets()
 	GlobalValues.activeRule = rulename
-	GlobalValues.config_rulesets.set_value( "userinfo", "activeRule", rulename )
+	GlobalValues.config_rulesets.set_value( "userinfo", "currentRule", rulename )
 	GlobalValues.config_rulesets.save(GlobalValues.filepath_rulesets)
 
 
