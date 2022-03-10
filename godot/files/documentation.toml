@@ -1,0 +1,22 @@
+[input]
+input = ["widefind_3_livingroom", "widefind_1_kitchen", "widefind_3_NOT-livingroom", "widefind_1_NOT-kitchen", "door_42_open", "door_42_closed"]
+
+
+[predefined_outputArgument]
+outputName = ["lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off"
+,"lamp_2_green","lamp_2_purple","lamp_2_blue","lamp_2_disco"
+,"lamp_3_green","lamp_3_purple","lamp_3_blue","lamp_3_disco"
+,"lamp_4_green","lamp_4_purple","lamp_4_blue","lamp_4_disco"]
+outputFunction = ["lamps", "lamps", "lamps", "lamps", "lamps", "lamps"
+,"lamps","lamps","lamps","lamps"
+,"lamps","lamps","lamps","lamps"
+,"lamps","lamps","lamps","lamps"]
+outputArgument = ["lamp_2_on", "lamp_2_off", "lamp_3_on", "lamp_3_off", "lamp_4_on", "lamp_4_off"
+,"lamp_2_green","lamp_2_purple","lamp_2_blue","lamp_2_disco"
+,"lamp_3_green","lamp_3_purple","lamp_3_blue","lamp_3_disco"
+,"lamp_4_green","lamp_4_purple","lamp_4_blue","lamp_4_disco"]
+
+
+[general_outputArgument]
+outputName = ["discord_0_send"]
+outputFunction = ["discord"]

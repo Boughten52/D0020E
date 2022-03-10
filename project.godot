@@ -1,0 +1,37 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="D0020E"
+run/main_scene="res://godot/scene/main.tscn"
+boot_splash/image="res://godot/images/splashScreen.png"
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
+config/icon="res://godot/images/administration-gbd025500f_640.png"
+config/windows_native_icon="res://images/D0020E_icon.ico"
+
+[autoload]
+
+GlobalValues="*res://godot/global/globalValues.gd"
+GlobalAllRuleDoc="*res://godot/global/global_AllRuleDoc.gd"
+GlobalRulesets="*res://godot/global/global_Rulesets.gd"
+
+[gui]
+
+theme/custom_font="res://godot/TTF/new_dynamicfont.tres"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0.45098, 0.4, 0.745098, 1 )
+environment/default_environment="res://godot/scene/default_env.tres"

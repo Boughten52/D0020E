@@ -1,0 +1,2 @@
+filepath_allRuleDoc = res://godot/files/documentation.toml
+filepath_rulesets = res://godot/files/config_rules.toml

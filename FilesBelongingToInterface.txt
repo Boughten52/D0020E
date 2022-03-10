@@ -1,0 +1,4 @@
+.import
+godot
+filepaths.txt
+project.godot
