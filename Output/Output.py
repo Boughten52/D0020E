@@ -42,4 +42,3 @@ class Output:
     def discord(self, output_argument):
         message = output_argument
         webhook.send(message)
-
