@@ -79,9 +79,11 @@ See `EXPLANATIONS.toml` for mapping between ID and physical object. For example 
 
 ## System Architecture
 
-We provide a simplified class diagram for visualizing the overall structure of the application. Methods and attributes are not presented here.
+The class diagram below presents an overview of the system architecture.
 
-![Image](/img/structure.drawio.png)
+![Image](/img/structure.png)
+
+When running the program `D0020E_Interface.exe` it reads all defined input and output from `documentation.toml`. When rulesets are created in the application they are saved to `config_rules.toml`. This file is then read by the `Main` object when starting the program, since it contains the rules for this run. Upon starting a run, the `Main` and `Output` objects also read the file `config.toml` which contains necessary setup information.
 
 ## <a name="add_input"></a>Adding New Input
 
@@ -90,23 +92,3 @@ _To be added_
 ## <a name="add_output"></a>Adding New Output
 
 _To be added_
-
-## Syntax Reference (remove later)
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
