@@ -1,0 +1,251 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://godot/scripts/changeRule.gd" type="Script" id=1]
+[ext_resource path="res://godot/scene/changeRuleLableTheme.tres" type="Theme" id=2]
+[ext_resource path="res://godot/scene/HomeButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://godot/scripts/ChangeRule_GridContainer.gd" type="Script" id=4]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="HomeButton" parent="." instance=ExtResource( 3 )]
+margin_left = -15.442
+margin_top = 8.15641
+margin_right = 60.558
+margin_bottom = 78.1564
+
+[node name="Label" type="Label" parent="."]
+margin_left = 114.176
+margin_top = 35.8764
+margin_right = 488.176
+margin_bottom = 80.8764
+text = "Choose a rule to change"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_left = 591.766
+margin_top = 28.4074
+margin_right = 894.769
+margin_bottom = 81.4074
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 33.0
+margin_top = 122.0
+margin_right = 978.0
+margin_bottom = 574.0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+margin_right = 568.0
+margin_bottom = 31.0
+theme = ExtResource( 2 )
+columns = 4
+script = ExtResource( 4 )
+
+[node name="index" type="Button" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_right = 154.0
+margin_bottom = 31.0
+text = "index"
+
+[node name="BInputName" type="Button" parent="ScrollContainer/GridContainer"]
+margin_right = 112.0
+margin_bottom = 31.0
+text = "InputName"
+
+[node name="BOutputName" type="Button" parent="ScrollContainer/GridContainer"]
+margin_left = 116.0
+margin_right = 241.0
+margin_bottom = 31.0
+text = "OutputName"
+
+[node name="BOutputArg" type="Button" parent="ScrollContainer/GridContainer"]
+margin_left = 245.0
+margin_right = 410.0
+margin_bottom = 31.0
+text = "OutputArgument "
+
+[node name="Change" type="Button" parent="ScrollContainer/GridContainer"]
+margin_left = 414.0
+margin_right = 568.0
+margin_bottom = 31.0
+text = "Press to change"
+
+[node name="num" type="Button" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 112.0
+margin_bottom = 90.0
+text = "#"
+
+[node name="InputName" type="Label" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 140.0
+margin_bottom = 90.0
+size_flags_vertical = 1
+text = "InputName"
+align = 3
+valign = 3
+
+[node name="OutputName" type="Label" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 153.0
+margin_bottom = 90.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme = ExtResource( 2 )
+text = "OutputName"
+align = 3
+
+[node name="OutputArg" type="Label" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 187.0
+margin_bottom = 90.0
+size_flags_vertical = 1
+text = "OutputArgument"
+align = 3
+
+[node name="ChangeButton" type="Button" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 112.0
+margin_bottom = 66.0
+text = "  Change "
+
+[node name="ChangeWindow" type="WindowDialog" parent="."]
+margin_left = 36.3459
+margin_top = 106.665
+margin_right = 852.346
+margin_bottom = 419.665
+window_title = "Change Rule"
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ChangeWindow"]
+margin_right = 815.0
+margin_bottom = 314.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChangeWindow/ScrollContainer"]
+margin_right = 760.0
+margin_bottom = 184.0
+
+[node name="VBoxInName" type="VBoxContainer" parent="ChangeWindow/ScrollContainer/HBoxContainer"]
+margin_right = 187.0
+margin_bottom = 184.0
+
+[node name="InputName" type="Label" parent="ChangeWindow/ScrollContainer/HBoxContainer/VBoxInName"]
+margin_right = 187.0
+margin_bottom = 55.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme = ExtResource( 2 )
+text = "InputName"
+align = 3
+
+[node name="OLD_InputName" type="Label" parent="ChangeWindow/ScrollContainer/HBoxContainer/VBoxInName"]
+margin_top = 59.0
+margin_right = 187.0
+margin_bottom = 114.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme = ExtResource( 2 )
+text = "OLD_InputName"
+align = 3
+
+[node name="EditInputName" type="OptionButton" parent="ChangeWindow/ScrollContainer/HBoxContainer/VBoxInName"]
+margin_top = 118.0
+margin_right = 187.0
+margin_bottom = 149.0
+text = "Input"
+
+[node name="AddInput" type="Button" parent="ChangeWindow/ScrollContainer/HBoxContainer/VBoxInName"]
+margin_top = 153.0
+margin_right = 187.0
+margin_bottom = 184.0
+text = "Add Input"
+
+[node name="VBoxOutName" type="VBoxContainer" parent="ChangeWindow/ScrollContainer/HBoxContainer"]
+margin_left = 191.0
+margin_right = 391.0
+margin_bottom = 184.0
+
+[node name="OutputName" type="Label" parent="ChangeWindow/ScrollContainer/HBoxContainer/VBoxOutName"]
+margin_right = 200.0
+margin_bottom = 55.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme = ExtResource( 2 )
+text = "OutputName"
+align = 3
+
+[node name="OLD_OutputName" type="Label" parent="ChangeWindow/ScrollContainer/HBoxContainer/VBoxOutName"]
+margin_top = 59.0
+margin_right = 200.0
+margin_bottom = 114.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme = ExtResource( 2 )
+text = "OLD_OutputName"
+align = 3
+
+[node name="EditOutputName" type="OptionButton" parent="ChangeWindow/ScrollContainer/HBoxContainer/VBoxOutName"]
+margin_top = 118.0
+margin_right = 200.0
+margin_bottom = 149.0
+text = "Output"
+
+[node name="VBoxOutArg" type="VBoxContainer" parent="ChangeWindow/ScrollContainer/HBoxContainer"]
+margin_left = 395.0
+margin_right = 618.0
+margin_bottom = 184.0
+
+[node name="OutputArg" type="Label" parent="ChangeWindow/ScrollContainer/HBoxContainer/VBoxOutArg"]
+margin_right = 223.0
+margin_bottom = 55.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme = ExtResource( 2 )
+text = "OutputArument"
+align = 3
+
+[node name="OLD_OutputArg" type="Label" parent="ChangeWindow/ScrollContainer/HBoxContainer/VBoxOutArg"]
+margin_top = 59.0
+margin_right = 223.0
+margin_bottom = 114.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme = ExtResource( 2 )
+text = "OLD_OutputArument"
+align = 3
+
+[node name="EditOuputArg" type="LineEdit" parent="ChangeWindow/ScrollContainer/HBoxContainer/VBoxOutArg"]
+margin_top = 118.0
+margin_right = 223.0
+margin_bottom = 153.0
+text = "PlaceText"
+expand_to_text_length = true
+
+[node name="SaveButton" type="Button" parent="ChangeWindow/ScrollContainer/HBoxContainer"]
+margin_left = 622.0
+margin_right = 760.0
+margin_bottom = 184.0
+text = "Save Changes"
+
+[node name="MissingInOutPut" type="ConfirmationDialog" parent="."]
+margin_left = 272.0
+margin_top = 318.0
+margin_right = 558.0
+margin_bottom = 461.0
+window_title = "Missing Input/Output"
+dialog_text = "Make sure to have at least 
+one input and output
+Otherwise,
+the rule won't be saved"
+
+[connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="ChangeWindow/ScrollContainer/HBoxContainer/VBoxInName/AddInput" to="." method="_on_AddInput_pressed"]
+[connection signal="pressed" from="ChangeWindow/ScrollContainer/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]

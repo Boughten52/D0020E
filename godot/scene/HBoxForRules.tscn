@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://godot/TTF/AtkinsonHyperlegible-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://godot/images/on_button.png" type="Texture" id=2]
+[ext_resource path="res://godot/images/off_button.png" type="Texture" id=3]
+[ext_resource path="res://godot/scripts/PopupDialog.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer"]
+margin_right = 264.0
+margin_bottom = 40.0
+theme = SubResource( 2 )
+
+[node name="CheckBox" type="CheckBox" parent="."]
+margin_right = 24.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 28.0
+margin_top = 8.0
+margin_right = 203.0
+margin_bottom = 32.0
+text = "[THING]_[ID]_[STATE]"
+
+[node name="CheckButton" type="CheckButton" parent="."]
+visible = false
+margin_left = 207.0
+margin_right = 267.0
+margin_bottom = 40.0
+custom_icons/off = ExtResource( 3 )
+custom_icons/on = ExtResource( 2 )
+pressed = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopupDialog" type="PopupDialog" parent="CheckButton"]
+margin_left = 7.79443
+margin_top = 50.5489
+margin_right = 267.794
+margin_bottom = 139.549
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CheckButton/PopupDialog"]
+margin_left = 9.14276
+margin_top = 12.6326
+margin_right = 247.143
+margin_bottom = 74.6326
+text = "When green, state is true
+When red, state is NOT true"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="mouse_entered" from="CheckButton" to="CheckButton/PopupDialog" method="_on_CheckButton_mouse_entered"]
+[connection signal="mouse_exited" from="CheckButton" to="CheckButton/PopupDialog" method="_on_CheckButton_mouse_exited"]

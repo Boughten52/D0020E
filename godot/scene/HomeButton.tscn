@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://godot/scripts/Home.gd" type="Script" id=1]
+[ext_resource path="res://godot/images/administration-gbd025500f_640.png" type="Texture" id=2]
+
+[node name="HomeButton" type="Button"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_right = 76.0
+margin_bottom = 70.0
+rect_rotation = 90.0
+icon = ExtResource( 2 )
+flat = true
+script = ExtResource( 1 )
+
+[connection signal="pressed" from="." to="." method="_on_Home_pressed"]
+[connection signal="pressed" from="." to="." method="_on_HomeButton_pressed"]

@@ -1,0 +1,222 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://godot/scene/HomeButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://godot/scripts/user.gd" type="Script" id=2]
+[ext_resource path="res://godot/TTF/new_dynamicfont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://godot/TTF/AtkinsonHyperlegible-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://godot/TTF/new_theme_font.tres" type="Theme" id=5]
+[ext_resource path="res://godot/scene/GridContainerUser.gd" type="Script" id=6]
+[ext_resource path="res://godot/scene/changeRuleLableTheme.tres" type="Theme" id=7]
+
+[sub_resource type="DynamicFont" id=6]
+size = 66
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 6 )
+
+[sub_resource type="Theme" id=7]
+default_font = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+
+[node name="Control" type="Control"]
+script = ExtResource( 2 )
+
+[node name="Home" parent="." instance=ExtResource( 1 )]
+margin_left = 1024.32
+margin_top = 2.24492
+margin_right = 1100.32
+margin_bottom = 72.2449
+
+[node name="WelcomeLabel" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 15.0
+margin_right = 233.0
+margin_bottom = 70.0
+theme = SubResource( 3 )
+text = "Welcome"
+
+[node name="ActiveRuleLabel" type="Label" parent="."]
+margin_left = 47.0
+margin_top = 108.0
+margin_right = 220.0
+margin_bottom = 153.0
+theme = SubResource( 7 )
+text = "Selected Rule: "
+
+[node name="ScrollContainerOLD" type="ScrollContainer" parent="."]
+visible = false
+margin_left = 97.1428
+margin_top = 180.674
+margin_right = 500.143
+margin_bottom = 433.674
+theme = ExtResource( 5 )
+custom_styles/bg = SubResource( 8 )
+
+[node name="HBoxContainer" type="GridContainer" parent="ScrollContainerOLD"]
+margin_right = 105.0
+margin_bottom = 25.0
+columns = 2
+
+[node name="InputLabel" type="Label" parent="ScrollContainerOLD/HBoxContainer"]
+margin_right = 47.0
+margin_bottom = 25.0
+text = "Input"
+
+[node name="OutputLabel" type="Label" parent="ScrollContainerOLD/HBoxContainer"]
+margin_left = 51.0
+margin_right = 105.0
+margin_bottom = 25.0
+text = "Ouput"
+
+[node name="AddNew" type="Button" parent="."]
+margin_left = 865.719
+margin_top = 152.415
+margin_right = 956.719
+margin_bottom = 183.415
+theme = SubResource( 5 )
+text = "Add New"
+
+[node name="Change" type="Button" parent="."]
+margin_left = 871.099
+margin_top = 236.461
+margin_right = 962.099
+margin_bottom = 267.461
+theme = SubResource( 5 )
+text = "Change"
+
+[node name="Remove" type="Button" parent="."]
+margin_left = 871.759
+margin_top = 324.57
+margin_right = 962.759
+margin_bottom = 355.57
+theme = SubResource( 5 )
+text = "Remove"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_left = 525.485
+margin_top = 32.7468
+margin_right = 828.485
+margin_bottom = 85.7468
+
+[node name="RunButton" type="Button" parent="."]
+margin_left = 813.731
+margin_top = 419.225
+margin_right = 992.731
+margin_bottom = 470.225
+rect_pivot_offset = Vector2( 89.5, 14.449 )
+theme = ExtResource( 5 )
+text = "Run Selected Rule"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 58.0
+margin_top = 164.0
+margin_right = 796.0
+margin_bottom = 564.0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+margin_right = 410.0
+margin_bottom = 31.0
+theme = ExtResource( 7 )
+columns = 3
+script = ExtResource( 6 )
+
+[node name="index" type="Button" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_right = 154.0
+margin_bottom = 31.0
+text = "index"
+
+[node name="BInputName" type="Button" parent="ScrollContainer/GridContainer"]
+margin_right = 112.0
+margin_bottom = 31.0
+text = "InputName"
+
+[node name="BOutputName" type="Button" parent="ScrollContainer/GridContainer"]
+margin_left = 116.0
+margin_right = 241.0
+margin_bottom = 31.0
+text = "OutputName"
+
+[node name="BOutputArg" type="Button" parent="ScrollContainer/GridContainer"]
+margin_left = 245.0
+margin_right = 410.0
+margin_bottom = 31.0
+text = "OutputArgument "
+
+[node name="Change" type="Button" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_left = 414.0
+margin_right = 568.0
+margin_bottom = 31.0
+text = "Press to change"
+
+[node name="num" type="Button" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 112.0
+margin_bottom = 90.0
+text = "#"
+
+[node name="InputName" type="Label" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 140.0
+margin_bottom = 90.0
+size_flags_vertical = 1
+text = "InputName"
+align = 3
+valign = 3
+
+[node name="OutputName" type="Label" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 153.0
+margin_bottom = 90.0
+grow_horizontal = 2
+size_flags_vertical = 1
+theme = ExtResource( 7 )
+text = "OutputName"
+align = 3
+
+[node name="OutputArg" type="Label" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 187.0
+margin_bottom = 90.0
+size_flags_vertical = 1
+text = "OutputArgument"
+align = 3
+
+[node name="ChangeButton" type="Button" parent="ScrollContainer/GridContainer"]
+visible = false
+margin_top = 35.0
+margin_right = 112.0
+margin_bottom = 66.0
+text = "  Change "
+
+[node name="StopButton" type="Button" parent="."]
+margin_left = 814.731
+margin_top = 499.524
+margin_right = 994.731
+margin_bottom = 550.524
+rect_pivot_offset = Vector2( 89.5, 14.449 )
+theme = ExtResource( 5 )
+text = "Stop Selected Rule"
+
+[connection signal="pressed" from="AddNew" to="." method="_on_AddNew_pressed"]
+[connection signal="pressed" from="AddNew" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Change" to="." method="_on_Change_pressed"]
+[connection signal="pressed" from="Change" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Remove" to="." method="_on_Remove_pressed"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="RunButton" to="." method="_on_RunButton_pressed"]
+[connection signal="pressed" from="StopButton" to="." method="_on_StopButton_pressed"]

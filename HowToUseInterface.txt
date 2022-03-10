@@ -1,0 +1,27 @@
+________________________________
+___Files belonging to interface:
+	Map: .import
+	Map: godot
+	filepaths.txt
+	project.godot
+
+	D0020E_Interface.exe
+	D0020E_Interface.pck
+
+__________________________
+___How to start interface:
+
+	__Option 1__
+
+	Download godot from: https://godotengine.org/download
+	Choose to import project
+	Choose "project.godot" as the project to import
+	You should now be able to edit and run the interface
+	
+
+	__Option 2__
+
+	If you own windows, 
+	then simply press the "D0020E_Interface.exe"
+
+

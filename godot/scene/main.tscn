@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://godot/scripts/main.gd" type="Script" id=1]
+[ext_resource path="res://godot/TTF/AtkinsonHyperlegible-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://godot/sound/posSound.mp3" type="AudioStream" id=3]
+[ext_resource path="res://godot/TTF/new_theme_font.tres" type="Theme" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 120
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 30
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+
+[sub_resource type="DynamicFont" id=7]
+
+[sub_resource type="DynamicFont" id=8]
+size = 34
+font_data = ExtResource( 2 )
+
+[node name="Node2D" type="Control"]
+theme = ExtResource( 4 )
+script = ExtResource( 1 )
+
+[node name="ButtonUSER" type="Button" parent="."]
+modulate = Color( 0.27451, 0.964706, 1, 1 )
+margin_left = 72.535
+margin_top = 121.494
+margin_right = 573.535
+margin_bottom = 479.494
+size_flags_horizontal = 9
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "USER"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonADMIN" type="Button" parent="."]
+modulate = Color( 0.27451, 0.964706, 1, 1 )
+margin_left = 679.852
+margin_top = 328.255
+margin_right = 881.852
+margin_bottom = 448.255
+size_flags_horizontal = 9
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "ADMIN"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonTEST" type="Button" parent="."]
+modulate = Color( 0.27451, 0.964706, 1, 1 )
+margin_left = 678.0
+margin_top = 135.0
+margin_right = 880.0
+margin_bottom = 255.0
+size_flags_horizontal = 9
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "TEST"
+expand_icon = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 76.0
+margin_top = 16.0
+margin_right = 254.0
+margin_bottom = 69.0
+custom_fonts/bold_italics_font = SubResource( 5 )
+custom_fonts/italics_font = SubResource( 6 )
+custom_fonts/bold_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
+text = "Welcome"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

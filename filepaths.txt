@@ -1,0 +1,2 @@
+filepath_allRuleDoc = documentation.toml
+filepath_rulesets = config_rules.toml

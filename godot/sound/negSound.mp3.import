@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/negSound.mp3-82cf383b6ef38a7853479979e874da40.mp3str"
+
+[deps]
+
+source_file="res://godot/sound/negSound.mp3"
+dest_files=[ "res://.import/negSound.mp3-82cf383b6ef38a7853479979e874da40.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
