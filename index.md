@@ -75,7 +75,7 @@ Replace the dots with the necessary information. When adding new input or output
 
 ## Running the Application
 
-_To be added_
+See `EXPLANATIONS.toml` for mapping between ID and physical object. For example door 42 is the front door to H2Al. `EXPLANATIONS.toml` should also be updated when new input or output is added to make it clear which ID corresponds to which object.
 
 ## System Architecture
 
