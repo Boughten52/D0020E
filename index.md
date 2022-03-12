@@ -129,7 +129,7 @@ When running the program `D0020E_Interface.exe` it reads all defined input and o
 
 These last two sections are intended for administrators and those who have some programming knowledge as they involve changing the source code and thereby the program structure.
 
-Since adding input and ouput involves changing the source code it can of course be done in many ways, but we recommend following our conventions in order to maintain the internal structure. The mayor steps for adding a new type of input are:
+Since adding input and ouput involves changing the source code it can of course be done in many ways, but we recommend following our conventions in order to maintain the internal structure. The major steps for adding a new type of input are:
 
 - Creating a class that inherits the `Input` interface
 - Implementing the method `run()` in the class and have it notify observers when it wants to send data
@@ -137,7 +137,7 @@ Since adding input and ouput involves changing the source code it can of course 
   - It is recommended to have data come in pairs (for example `door_1_open` and `door_1_closed`)
 - Updating the list `input` in `documentation.toml` to also contain your newly defined data strings
 - Adding connection data that shouldn't be in the source code (such as IP:s and passwords) to `config.toml`
-- Creating an instance of the new class in the `__init__()` function in `main.py` and executing its `run` method
+- Creating an instance of the new class in the `__init__()` method in `main.py` and executing its `run` method
 - Updating `EXPLANATIONS.toml` with information about which ID corresponds to which physical object and other important notes
   - This step is not mandatory but recommended for understandability
 
@@ -182,7 +182,7 @@ This step could be considered optional since it doesn't change how to program wo
 
 ## <a name="add_output"></a>Adding New Output
 
-How you structure your output is highly up to you. The mayor steps for adding a new output are however:
+How you structure your output is highly up to you. The major steps for adding a new output are however:
 
 - Defining a new method in `Output.py` that will be called from `main.py`
 - Adding initialization data to `config.toml` and `Output.py` if necessary
