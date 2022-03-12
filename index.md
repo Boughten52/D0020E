@@ -35,6 +35,10 @@ A scenario could be a lot simpler or a lot more complex than this.
   - [Creating and Running a New Object](#creating_and_running_a_new_object)
   - [Adding Explanations](#adding_explanations)
 - [Adding New Output](#add_output)
+  - [Defining a New Output Method](#defining_a_new_output_method)
+  - [Adding Initialization Data](#adding_initialization_data)
+  - [Updating the Documentation](#updating_the_documentation_2)
+  - [Adding Explanations](#adding_explanations_2)
 
 ## <a name="currently_supported_input"></a>Currently Supported Input
 
