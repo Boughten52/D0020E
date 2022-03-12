@@ -5,12 +5,12 @@ This project aims to provide rule-based activity recognition by using different 
 Rule-based activity recognition means to have a set of rules, which can be either true or false, and let them define a certain human behaviour. A rule-based scenario could for example look like this:
 
 If
-- a person is in the kitchen,
-- the fridge has been opened recently, 
-- and the stove is currently on.
+- A person is in the kitchen
+- The fridge has been opened recently
+- And the stove is currently on
 
 Then
-- assume that a person is currently preparing food.
+- Assume that a person is currently preparing food
 
 A scenario could be a lot simpler or a lot more complex than this.
 
@@ -28,6 +28,12 @@ A scenario could be a lot simpler or a lot more complex than this.
 - [Running the Application](#running_the_application)
 - [System Architecture](#system_architecture)
 - [Adding New Input](#add_input)
+  - [Creating a Class](#creating_a_class)
+  - [Implementing the Run-Method](#implementing_the_run-method)
+  - [Updating the Documentation](#updating_the_documentation)
+  - [Adding Connection Information](#adding_connection_information)
+  - [Creating and Running a New Object](#creating_and_running_a_new_object)
+  - [Adding Explanations](#adding_explanations)
 - [Adding New Output](#add_output)
 
 ## <a name="currently_supported_input"></a>Currently Supported Input
@@ -118,6 +124,57 @@ When running the program `D0020E_Interface.exe` it reads all defined input and o
 ## <a name="add_input"></a>Adding New Input
 
 These last two sections are intended for administrators and those who have some programming knowledge as they involve changing the source code and thereby the program structure.
+
+Since adding input and ouput involves changing the source code it can of course be done in many ways, but we recommend following our conventions in order to maintain the internal structure. The mayor steps for adding a new type of input are:
+
+- Creating a class that inherits the `Input` interface
+- Implementing the method `run()` in the class and have it notify observers when it wants to send data
+  - In this step one should come up with names for the sent data that follow the structure `object_id_status`
+  - It is recommended to have data come in pairs (for example `door_1_open` and `door_1_closed`)
+- Updating the list `input` in `documentation.toml` to also contain your newly defined data strings
+- Adding connection data that shouldn't be in the source code (such as IP:s and passwords) to `config.toml`
+- Creating an instance of the new class in the `__init__()` function in `main.py` and executing its `run` method
+- Updating `EXPLANATIONS.toml` with information about which ID corresponds to which physical object and other important notes
+  - This step is not mandatory but recommended for understandability
+
+Each step will be explained in more detail below.
+
+### <a name="creating_a_class"></a>Creating a Class
+
+Go to the folder `Input` and create a new class that implements the interface from `Input.py`. This interface contains a method `__init__()` and a method `run()`. On init the object must create an observer object via `observer = Observer()`. The observer is contained in the `Observer` folder in the project and must be imported. During initialization the object should also perform all connections to the outside.
+
+### <a name="implementing_the_run-method"></a>Implementing the Run-Method
+
+The method `run()` should be responsible for sending data to main via notifying observers since the method `event_handler(data)` in `main.py` is an observer. Implement the method, make it work for your purpose and perform `observer.post_event("Event", ...)` every time you want to send data, replacing the dots with a string of your choice. Here it is up to you to choose appropriate names for your data. In order to work well with the rest of the program, the data should follow the naming convention `object_id_status` where `object` is the actual object (e.g. a door or sensor type), `id` is the unique ID for this object and `status` is the current status that got changed into (note that the objects in this context doesn't refer to the instance of the class). In most cases it is recommended that the sent data come in at least pairs i.e. that `object_id_...` has two or more statuses. Since the current states are always stored in main this could create more complex scenarios. A door should for example have the statuses `door_1_open` and `door_1_closed` instead of only knowing when it's opened.
+
+### <a name="updating_the_documentation"></a>Updating the Documentation
+
+The new names that you have come up with for the sent data must also be placed in `documentation.toml` in order to be read into the interface. Simply go to the file and add your new names to the list `input`.
+
+### <a name="adding_connection_information"></a>Adding Connection Information
+
+If an input requires URL:s, IP addresses, usernames or passwords in order to connect to some client or service they should not be placed in the source code. This is the purpose of `config.toml`. Go to this file and add a field for your new input. To this field, add `enabled = true` (this is very useful when debugging) and your sensitive information. 
+
+### <a name="creating_and_running_a_new_object"></a>Creating and Running a New Object
+
+The new object has to be created somewhere and this is done in `main.py`. Go to the `__init__()` method and add `if config["YOUR_INPUT"]["enabled"]`, and then inside that if-statement create your new object with the information from the config file if you used that. Add the line `YOUR_OBJECT.run()` for your object to start sending data. If done correctly the method `event_handler(data)` will be notified when something happens.
+
+Sometimes it might be prefarable to let the object execute in its own thread (this is useful if the input doesn't support events and has to be configured to simulate events manually). For this we use [Python Threading](https://docs.python.org/3/library/threading.html) by creating the object normally, creating a new thread and have it target the method `YOUR_OBJECT.run` and then performing `YOUR_THREAD.start()`. This is how it looks like in the case of the simulator:
+
+```
+if config_rules["simulator"]["enabled"]:
+    simulator = Simulator()
+    simulatorThread = threading.Thread(target=simulator.run)
+    simulatorThread.start()
+```
+
+Please note that the simulator reads from `config_rules.toml`. This is only the case for the simulator and everything else should read from `config.toml`.
+
+### <a name="adding_explanations"></a>Adding Explanations
+
+Go to the file `EXPLANATIONS.toml` and add some comments about your new input. Explain which ID corresponds to what physical object and other important information that could be useful for someone wanting to use the program.
+
+This step could be considered optional since it doesn't change how to program works but it is highly recommended in order to maintain understandability.
 
 ## <a name="add_output"></a>Adding New Output
 
