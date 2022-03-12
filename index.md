@@ -141,7 +141,7 @@ Each step will be explained in more detail below.
 
 ### <a name="creating_a_class"></a>Creating a Class
 
-Go to the folder `Input` and create a new class that implements the interface from `Input.py`. This interface contains a method `__init__()` and a method `run()`. On init the object must create an observer object via `observer = Observer()`. The observer is contained in the `Observer` folder in the project and must be imported. During initialization the object should also perform all connections to the outside.
+Go to the folder `Input` and create a new class that implements the interface from `Input.py`. This interface contains a method `__init__()` and a method `run()`. On init the object must create an observer object via `observer = Observer()`. The observer is contained in the `Observer` folder and must be imported to the class. During initialization the object should also perform all connections to services of the program.
 
 ### <a name="implementing_the_run-method"></a>Implementing the Run-Method
 
@@ -178,4 +178,34 @@ This step could be considered optional since it doesn't change how to program wo
 
 ## <a name="add_output"></a>Adding New Output
 
-_To be added_
+How you structure your output is highly up to you. The mayor steps for adding a new output are however:
+
+- Defining a new method in `Output.py` that will be called from `main.py`
+- Adding initialization data to `config.toml` and `Output.py` if necessary
+- Updating `documentation.toml` with the new output
+- Adding explanations about your output to `EXPLANATIONS.toml`
+
+### <a name="defining_a_new_output_method"></a>Defining a New Output Method
+
+Go to `Output/Output.py` and define a new method that will handle your new output. This method will be called from `main.py` each time a specified rule is fulfilled, and it should take a string as an output argument. What you place in your method is entirely up to you since it no longer has any connection to the main application. In our case we created references to other objects.
+
+### <a name="adding_initialization_data"></a>Adding Initialization Data
+
+If your new output for example has a reference to an object that requires services outside of the program, remember to place any sensitive connection information (such as IP:s or passwords) in `config.toml` and read that file. This is recommended in order to keep sensitive data separated from the source code.
+
+### <a name="updating_the_documentation_2"></a>Updating the Documentation
+
+In order for the new method to be available in the interface you have to update `documentation.toml`. In this file there are two types of output separated into two fields. `predefined_outputArgument` is used when the argument sent to the new method is to be hard-coded. Here you specify `outputName` which could be anything you like, `outputFunction` which is the newly created method in `Output.py` and `outputArgument` which is the hard-coded argument you want to send to that method. The field `general_outputArgument` is used when you want to let a user of the interface specify what string the output argument should be. Here you only specify the `outputName` and `outputFunction`.
+
+One very important note is that the association between `outputName`, `outputFunction` and `outputArgument` is done by list indexing. This means that a connected name, function and argument should be placed on the same index in each of the three lists. Take this example:
+
+```
+outputName      = ["Turn on kitchen lamp", "Turn on livingroom lamp"]
+outputFunction  = ["lamps"               , "lamps"                  ]
+outputArgument  = ["lamp_2_on"           , "lamp_4_on"              ]
+```
+`"Turn on kitchen lamp"`, `"lamps"` and `"lamp_2_on"` are all stored on index 0 and correspond to one output while `"Turn on livingroom lamp"`, `"lamps"` and `"lamp_4_on"` are all stored on index 1 and correspond to another output. Note however that in this case they use the same output function.
+
+### <a name="adding_explanations_2"></a>Adding Explanations
+
+As with adding explanations to new input, this step is also optinal but recommended. Go to `EXPLANATIONS.toml` and add information about which ID corresponds to what actual object and other useful information. See the file for examples.
